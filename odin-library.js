@@ -21,3 +21,8 @@ function addBookToLibrary() {
     myLibrary.push(enterBook);
 }
 
+function bookList() {
+    for (let i = 0; i < myLibrary.length; i++) {
+        
+    }
+}
