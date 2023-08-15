@@ -17,5 +17,7 @@ function Book(title, author, pages, read) {
   }
 
 function addBookToLibrary() {
-    // add code here
+    let enterBook = prompt("Please add a book title").toLowerCase();
+    myLibrary.push(enterBook);
 }
+
