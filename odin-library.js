@@ -1,7 +1,7 @@
 const data = document.querySelector(".card");
 
 // List of books in the library
-const myLibrary = [];
+const myLibrary = ["Wild at Heart", "Atomic Habits"];
 
 // Constructor for making "Book" objects & reporting "Book" info
 function Book(title, author, pages, read) {
@@ -19,6 +19,9 @@ function Book(title, author, pages, read) {
     console.log(title, author, pages, read)
   }
 }
+
+// const book = new Book('Wild at Heart', 'John Eldredge', '234', 'yes')
+// book.info();
 
 // Stores new Book objects into myLibrary array via user input
 function addBookToLibrary() {
