@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+  
+body {
+  min-height: 100vh;
+}
+  
+.container {
+  display: grid;
+  grid-template: 0.5fr 3.725fr / 0.5fr 2.5fr 1fr;
+}
+  
+.container div {
+  padding: 15px;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.main {
+  background-color: #EEE;
+  grid-column: 2 / span 2;
+  grid-row: 2;
+  gap: 15px;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.main .card {
+  box-shadow: 1px 5px 3px #c7c9cc;
+}
+
+.card p {
+  color: black;
+  font-weight: normal;
+  font-size: 14px;
+}
+    
+.card .title {
+  font-size: 18px;
+  font-weight: bold;
+}
