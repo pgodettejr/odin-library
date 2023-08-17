@@ -1,3 +1,6 @@
+const data = document.querySelector(".card");
+
+// List of books in the library
 const myLibrary = [];
 
 // Constructor for making "Book" objects & reporting "Book" info
@@ -26,6 +29,6 @@ function addBookToLibrary() {
 // Loops through myLibrary array & displays each Book on the webpage (via table or "card")
 function bookList() {
   for (let i = 0; i < myLibrary.length; i++) {
-        
+    return data.innerText;
   }
 }
