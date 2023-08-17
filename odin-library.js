@@ -24,14 +24,15 @@ function Book(title, author, pages, read) {
 // book.info();
 
 // Stores new Book objects into myLibrary array via user input
-function addBookToLibrary() {
+function addBookToLibrary(myLibrary) {
   let enterBook = prompt("Please add a book title").toLowerCase();
   myLibrary.push(enterBook);
+  return myLibrary;
 }
 
 // Loops through myLibrary array & displays each Book on the webpage (via table or "card")
-function bookList() {
+function bookList(myLibrary) {
   for (let i = 0; i < myLibrary.length; i++) {
-    return data.innerText;
+    data.innerText += myLibrary; // changed from return data.innerText, neither of these seem to work? Or the issue is addBookToLibrary()
   }
 }
