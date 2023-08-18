@@ -18,7 +18,7 @@ function addBookToLibrary(myLibrary) {
   }
 } */
 
-// Loops through myLibrary array & displays each Book on the webpage (via table or "card"). Is a different for loop better here?
+// Loops through myLibrary array & displays each Book on the webpage (via table or "card"). Use either for...in or for...of loop to better align with Book constructor?
 function bookList(myLibrary) {
   for (let i = 0; i < myLibrary.length; i++) {
     data.innerText += myLibrary; // changed from return data.innerText, neither of these seem to work? Or the issue is addBookToLibrary()
