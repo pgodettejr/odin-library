@@ -8,11 +8,18 @@ body {
 }
   
 .container {
-  display: grid;
-  grid-template: 0.5fr 3.725fr / 0.5fr 2.5fr 1fr;
+  /* display: grid;
+  grid-template: 0.5fr 3.725fr / 0.5fr 2.5fr 1fr; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
   
 .container div {
+  width: 50%;
+  height: 50%;
+  margin: auto;
   padding: 15px;
   font-size: 32px;
   font-weight: bold;
@@ -22,16 +29,21 @@ body {
 
 .main {
   background-color: #EEE;
-  grid-column: 2 / span 2;
+  /* grid-column: 2 / span 2;
   grid-row: 2;
   gap: 15px;
 
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr; */
 }
 
 .main .card {
   box-shadow: 1px 5px 3px #c7c9cc;
+}
+
+button {
+  padding: 10px;
+  display: inline-block;
 }
 
 /* .card p {
