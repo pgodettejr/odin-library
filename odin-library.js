@@ -6,13 +6,13 @@ const myLibrary = [];
 
 // Loops through myLibrary array & displays each Book on the webpage via "card"
 function bookList(library) {
-  main.innerText = '';
+  main.innerText = ''; // Is this preventing the card from displaying? All node children get removed & replaced with '' when innerText is set
   for (let i = 0; i < library.length; i++) {
     const book = library[i];
     const bookInfo = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read()}`;
     const card = document.createElement('div');
 
-    card.classList.add('card'); // I think this is preventing the card from showing up on the webpage (created/placed within the DOM)
+    card.classList.add('card');
     card.textContent = bookInfo;
     main.appendChild(card);
   }
@@ -37,7 +37,7 @@ function Book(title, author, pages, read) {
   }
 }
 
-// Stores new Book objects into myLibrary array via user input
+// Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
 newBook.addEventListener('click', () => {
   const title = prompt("Please enter the book title:");
   const author = prompt("Please enter the author:");
