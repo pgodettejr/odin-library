@@ -16,6 +16,10 @@ body {
   margin-inline: auto;
 }
 
+h1 {
+  text-align: center;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -86,4 +90,9 @@ button {
   border: none;
   border-radius: 8px;
   display: inline-block;
+}
+
+.delete-buttons {
+  display: flex;
+  flex-direction: column;
 }
