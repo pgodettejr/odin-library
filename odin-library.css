@@ -86,13 +86,19 @@ tr:nth-of-type(2n) {
 
 button {
   margin: 2rem;
-  padding: 8px 16px;
+  padding: 16px 32px;
   border: none;
   border-radius: 8px;
   display: inline-block;
 }
 
-.delete-buttons {
-  display: flex;
-  flex-direction: column;
+.new-book {
+  background-color: #596D48;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.remove {
+  margin: 0;
+  padding: 4px 8px;
 }
