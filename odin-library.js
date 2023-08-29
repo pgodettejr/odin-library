@@ -1,4 +1,4 @@
-const main = document.querySelector(".main");
+const main = document.querySelector(".container");
 const newBook = document.querySelector(".new-book");
 
 // List of books in the library
