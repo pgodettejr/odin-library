@@ -1,5 +1,5 @@
 const main = document.querySelector(".container");
-const newBook = document.querySelector(".new-book");
+const bookBtn = document.querySelector(".new-book");
 
 // List of books in the library
 const myLibrary = [];
