@@ -28,11 +28,18 @@ function Book(title, author, pages, read) {
   }
 }
 
-// Stores new Book objects into myLibrary array via user input. Prompt isn't popping up. May need a forEach button method here & target it in the DOM above
+// Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
 function addBookToLibrary(myLibrary) {
-  let enterBook = prompt("Please add a book title").toLowerCase();
-  myLibrary.push(enterBook);
-  return myLibrary;
+  const newTitle = prompt("Please enter the book title:");
+  const newAuthor = prompt("Please enter the author:");
+  const newPages = parseInt(prompt("How many pages is the book?:"));
+  const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
+
+  if (title && author && !isNaN(pages) && (read === 'yes' || read === 'no')) {
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+    bookList(myLibrary);
+  }
 }
 
 // May need this under addBookToLibrary() instead
@@ -104,18 +111,3 @@ function bookList(library) {
 }
 
 bookList(myLibrary); */
-
-/* ChatGPT "New Book" button functionality. May need a forEach button method here & target it in the DOM above
-
-newBook.addEventListener('click', () => {
-  const title = prompt("Please enter the book title:");
-  const author = prompt("Please enter the author:");
-  const pages = parseInt(prompt("How many pages is the book?:"));
-  const read = prompt("Have you read the book? (yes/no)").toLowerCase();
-
-  if (title && author && !isNaN(pages) && (read === 'yes' || read === 'no')) {
-    const newBook = new Book(title, author, pages, read);
-    myLibrary.push(newBook);
-    bookList(myLibrary);
-  }
-}); */
