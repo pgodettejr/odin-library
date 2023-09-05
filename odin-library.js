@@ -11,7 +11,7 @@ function bookList(myLibrary) {
   }
 }
 
-// Constructor for making "Book" objects & reporting "Book" info
+// Constructor for making "Book" objects & reporting "Book" info. if statement may have to be changed (what it returns)
 function Book(title, author, pages, read) {
   this.title = title
   this.author = author
