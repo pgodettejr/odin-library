@@ -4,13 +4,6 @@ const bookBtn = document.querySelector(".new-book");
 // List of books in the library
 const myLibrary = [];
 
-// Loops through myLibrary array & displays each Book on the webpage via "card". Apparently this tries to read the entire array instead of one item at a time.
-function bookList(myLibrary) {
-  for (let i = 0; i < myLibrary.length; i++) {
-    data.innerText += myLibrary; // changed from return data.innerText, neither of these seem to work? Or the issue is addBookToLibrary()
-  }
-}
-
 // Constructor for making "Book" objects & reporting "Book" info. if statement may have to be changed (what it returns)
 function Book(title, author, pages, read) {
   this.title = title
@@ -87,6 +80,13 @@ function AddTableARIA() {
 }
 
 AddTableARIA();
+
+// Loops through myLibrary array & displays each Book on the webpage via "card". Apparently this tries to read the entire array instead of one item at a time.
+function bookList(myLibrary) {
+  for (let i = 0; i < myLibrary.length; i++) {
+    data.innerText += myLibrary; // changed from return data.innerText, neither of these seem to work? Or the issue is addBookToLibrary()
+  }
+}
 
 // Old & incorrect code
 
