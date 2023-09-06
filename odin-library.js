@@ -31,7 +31,7 @@ function addBookToLibrary(myLibrary) {
   if (title && author && !isNaN(pages) && (read === 'yes' || read === 'no')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    bookList(myLibrary);
+    bookList(myLibrary); // We might need this. We might not.
   }
 }
 
@@ -43,6 +43,7 @@ function addBookToLibrary(myLibrary) {
   }
 } */
 
+// Delete this if we have to rework HTML to show just the table header (rows/cells get filled in only after user input)
 function AddTableARIA() {
   try {
     let allTables = document.querySelectorAll('table');
@@ -101,6 +102,9 @@ function bookList(library) {
   main.innerText = ''; // Is this preventing the card from displaying? All node children get removed & replaced with '' when innerText is set
   for (let i = 0; i < library.length; i++) {
     const book = library[i];
+
+    // Everything below this line would have to change to accommodate table elements
+
     const bookInfo = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read()}`;
     const card = document.createElement('div');
 
