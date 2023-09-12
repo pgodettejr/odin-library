@@ -1,3 +1,4 @@
+// Will need more DOM elements here once HTML is modified
 const main = document.querySelector(".container");
 const bookBtn = document.querySelector(".new-book");
 
@@ -21,7 +22,7 @@ function Book(title, author, pages, read) {
   }
 }
 
-// Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
+// Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above. Remove prompts & add code related to a form
 function addBookToLibrary(myLibrary) {
   const newTitle = prompt("Please enter the book title:");
   const newAuthor = prompt("Please enter the author:");
@@ -43,7 +44,7 @@ function addBookToLibrary(myLibrary) {
   }
 } */
 
-// Delete this if we have to rework HTML to show just the table header (rows/cells get filled in only after user input)
+// Delete this or comment it out if we have to rework HTML to show just the table header (rows/cells get filled in only after user input)
 function AddTableARIA() {
   try {
     let allTables = document.querySelectorAll('table');
@@ -85,7 +86,7 @@ AddTableARIA();
 // Loops through myLibrary array & displays each Book on the webpage via "card". Apparently this tries to read the entire array instead of one item at a time.
 function bookList(myLibrary) {
   for (let i = 0; i < myLibrary.length; i++) {
-    data.innerText += myLibrary; // changed from return data.innerText, neither of these seem to work? Or the issue is addBookToLibrary()
+    data.innerText += myLibrary; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
   }
 }
 
