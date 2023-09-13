@@ -81,7 +81,7 @@ AddTableARIA();
 // Loops through myLibrary array & displays each Book on the webpage via "card". Apparently this tries to read the entire array instead of one item at a time.
 function bookList(myLibrary) {
   for (let i = 0; i < myLibrary.length; i++) {
-    data.innerText += myLibrary; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
+    data.textContent += myLibrary; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
   }
 }
 
@@ -100,7 +100,7 @@ function bookList(myLibrary) {
 /* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
 
 function bookList(library) {
-  main.innerText = ''; // Is this preventing the card from displaying? All node children get removed & replaced with '' when innerText is set
+  td[data-cell=true].textContent = '';
   for (let i = 0; i < library.length; i++) {
     const book = library[i];
 
