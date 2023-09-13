@@ -78,12 +78,25 @@ function AddTableARIA() {
 
 AddTableARIA();
 
-// Loops through myLibrary array & displays each Book on the webpage via "card". Apparently this tries to read the entire array instead of one item at a time.
-function bookList(myLibrary) {
-  for (let i = 0; i < myLibrary.length; i++) {
-    data.textContent += myLibrary; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
+// Loops through myLibrary array & displays each Book on the webpage via table row. Apparently this tries to read the entire array instead of one item at a time?
+function bookList(myLibrary) { // parameter may need to be "datarow" instead of "myLibrary". Change it in for of loop below as well if this is the case
+  const table = document.querySelector('#book-info');
+  const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
+  if (firstEmptyRow === null) {
+    console.log('No more available empty rows');
+    return;
   }
+
+  let i = 0;
+  for (cellvalue of myLibrary) {
+    firstEmptyRow.children[i].textContent = cellvalue;
+    i++;
+  }
+
+  firstEmptyRow.setAttribute('data-cell', 'false');
 }
+
+// Populates empty row with book info from user input
 
 // Old & incorrect code
 
@@ -96,6 +109,12 @@ function bookList(myLibrary) {
 // const newAuthor = prompt("Please enter the author:");
 // const newPages = parseInt(prompt("How many pages is the book?:"));
 // const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
+
+// Old bookList function
+
+/* for (let i = 0; i < myLibrary.length; i++) {
+  data.textContent += myLibrary[i]; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
+} */
 
 /* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
 
