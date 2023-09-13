@@ -22,13 +22,8 @@ function Book(title, author, pages, read) {
   }
 }
 
-// Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above. Remove prompts & add code related to a form
+// Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
 function addBookToLibrary(myLibrary) {
-  const newTitle = prompt("Please enter the book title:");
-  const newAuthor = prompt("Please enter the author:");
-  const newPages = parseInt(prompt("How many pages is the book?:"));
-  const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
-
   if (title && author && !isNaN(pages) && (read === 'yes' || read === 'no')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
@@ -96,6 +91,11 @@ function bookList(myLibrary) {
 // book.info();
 
 // const data = document.querySelector(".card");
+
+// const newTitle = prompt("Please enter the book title:");
+// const newAuthor = prompt("Please enter the author:");
+// const newPages = parseInt(prompt("How many pages is the book?:"));
+// const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
 
 /* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
 
