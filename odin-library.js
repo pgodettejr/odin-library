@@ -96,7 +96,10 @@ function bookList(myLibrary) { // parameter may need to be "datarow" instead of 
   firstEmptyRow.setAttribute('data-cell', 'false');
 }
 
-// Populates empty row with book info from user input
+// "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
+bookBtn.addEventListener('click', (e) => {
+  e.target.dataset.cell += innerText; // This may need to be under the "Confirm/Submit" button inside the form
+});
 
 // Old & incorrect code
 
@@ -113,7 +116,12 @@ function bookList(myLibrary) { // parameter may need to be "datarow" instead of 
 // Old bookList function
 
 /* for (let i = 0; i < myLibrary.length; i++) {
-  data.textContent += myLibrary[i]; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
+  data.textContent += myLibrary[i].title; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
+  data.textContent += myLibrary[i].author;
+  data.textContent += myLibrary[i].pages;
+  data.textContent += myLibrary[i].read;
+
+  tr.appendChild(td);
 } */
 
 /* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
