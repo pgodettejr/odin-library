@@ -1,6 +1,9 @@
 // Will need more DOM elements here once HTML is modified
 const main = document.querySelector(".container");
 const bookBtn = document.querySelector(".new-book");
+const dialog = document.querySelector("#form-dialog");
+const confirmBtn = document.querySelector("#confirmBtn");
+const ouputBox = document.querySelector("output");
 
 // List of books in the library
 const myLibrary = [];
@@ -97,8 +100,26 @@ function bookList(myLibrary) { // parameter may need to be "datarow" instead of 
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
-bookBtn.addEventListener('click', (e) => {
-  e.target.dataset.cell += innerText; // This may need to be under the "Confirm/Submit" button inside the form
+bookBtn.addEventListener('click', () => {
+  dialog.showModal();
+  // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
+});
+
+// "Confirm" button functionality that checks that all book info was completed by user, then submits it to the table
+confirmBtn.addEventListener('click', (e) => {
+  let complete = document.getElementById("book-form").checkValidity();
+  if(complete) {
+    e.preventDefault();
+    addBookToLibrary();
+  }
+});
+
+// "Cancel" button functionality that deletes all book info that was entered and closes the form
+dialog.addEventListener("close", (e) => {
+  outputBox.value = 
+    dialog.returnValue === "default"
+      ? "No return value."
+      : `ReturnValue: ${dialog.returnValue}.`;
 });
 
 // Old & incorrect code
