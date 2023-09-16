@@ -70,6 +70,38 @@
       </tr>
     </table>
 
+    <dialog id="form-dialog">
+      <form action="" method="get" id="book-form">
+        <p>Enter your book info below:</p>
+        <div class="form-col">
+          <label for="book-title">Book Title</label>
+          <input type="text" name="book-title" id="book-title" required />
+        </div>
+  
+        <div class="form-col">
+          <label for="book-author">Author</label>
+          <input type="text" name="book-author" id="book-author" required />
+        </div>
+        
+        <div class="form-col">
+          <label for="total-pages"># of Pages</label>
+          <input type="total-pages" name="total-pages" id="total-pages" placeholder="joe@example.com" />
+        </div>
+  
+        <div class="form-col">
+          <label for="phone">Phone Number</label>
+          <input type="tel" name="phone" id="phone" min="0" max="9" 
+                placeholder="555-555-5555"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+        </div>
+
+        <div class="form-buttons">
+          <button type="submit" id="confirmBtn">Confirm</button>
+          <button id="cancelBtn" formmethod="dialog">Cancel</button>
+        </div>
+          
+    </dialog>
+    <output></output>
     <button class="new-book">NEW BOOK</button>
   </div>
   
