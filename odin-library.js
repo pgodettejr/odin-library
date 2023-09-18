@@ -3,7 +3,8 @@ const main = document.querySelector(".container");
 const bookBtn = document.querySelector(".new-book");
 const dialog = document.querySelector("#form-dialog");
 const confirmBtn = document.querySelector("#confirmBtn");
-const ouputBox = document.querySelector("output");
+const cancelBtn = document.querySelector("#cancelBtn");
+const outputBox = document.querySelector("output");
 
 // List of books in the library
 const myLibrary = [];
@@ -115,11 +116,8 @@ confirmBtn.addEventListener('click', (e) => {
 });
 
 // "Cancel" button functionality that deletes all book info that was entered and closes the form
-dialog.addEventListener("close", (e) => {
-  outputBox.value = 
-    dialog.returnValue === "default"
-      ? "No return value."
-      : `ReturnValue: ${dialog.returnValue}.`;
+cancelBtn.addEventListener('click', () => {
+  dialog.close();
 });
 
 // Old & incorrect code
