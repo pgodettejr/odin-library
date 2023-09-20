@@ -9,19 +9,21 @@ const outputBox = document.querySelector("output");
 // List of books in the library
 const myLibrary = [];
 
-// Constructor for making "Book" objects & reporting "Book" info. if statement may have to be changed (what it returns)
+// Constructor for making "Book" objects & reporting "Book" info
 function Book(title, author, pages, read) {
   this.title = title
   this.author = author
   this.pages = pages
   this.read = function() {
     if (read === 'yes') {
-      return 'read';
+      return 'yes';
+    } else if (read === 'no') {
+      return 'no';
     } else {
-      return 'not read';
+      return 'ERROR!'
     }
   }
-  this.info = function(){
+  this.info = function() {
     console.log(title, author, pages, read)
   }
 }

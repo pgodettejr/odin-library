@@ -84,17 +84,19 @@ tr:nth-of-type(2n) {
   }
 }
 
-
 #form-dialog {
   border: none;
   background-color: #323232;
   padding: 40px 30px 40px;
   border-radius: 8px;
   box-shadow: 0 5px 3px #c7c9cc;
-}
 
-#form-dialog::after {
-  position: absolute;
+  /* Cancel button no longer works once I implement this block of CSS to center the dialog */
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40%; */
 }
 
 #book-form {
@@ -124,6 +126,11 @@ label, input {
   width: 80%;
   height: auto;
 }
+
+/* input:focus-visible {
+  outline: 3px #596D48;
+  outline-offset: .25rem;
+} */
 
 button {
   margin: 2rem;
