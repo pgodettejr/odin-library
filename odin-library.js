@@ -100,6 +100,7 @@ function bookList(datarow) {
   }
 
   firstEmptyRow.setAttribute('data-cell', 'false');
+  dialog.reset();
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
@@ -121,6 +122,11 @@ confirmBtn.addEventListener('click', (e) => {
 // "Cancel" button functionality that deletes all book info that was entered and closes the form
 cancelBtn.addEventListener('click', () => {
   dialog.close();
+});
+
+// Do I actually need this or is the "Confirm" button functionality above good enough?
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('confirmBtn').addEventListener('click', addBookToLibrary());
 });
 
 // Old & incorrect code
