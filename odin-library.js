@@ -15,10 +15,10 @@ function Book(title, author, pages, read) {
   this.author = author
   this.pages = pages
   this.read = function() {
-    if (read === 'yes') {
-      return 'yes';
-    } else if (read === 'no') {
-      return 'no';
+    if (read === 'Yes') {
+      return 'Yes';
+    } else if (read === 'No') {
+      return 'No';
     } else {
       return 'ERROR!'
     }
@@ -29,11 +29,11 @@ function Book(title, author, pages, read) {
 }
 
 // Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
-function addBookToLibrary(myLibrary) {
-  if (title && author && !isNaN(pages) && (read === 'yes' || read === 'no')) {
+function addBookToLibrary() {
+  if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    bookList(myLibrary); // We might need this. We might not.
+    bookList();
   }
 }
 
@@ -85,7 +85,7 @@ function AddTableARIA() {
 AddTableARIA();
 
 // Loops through myLibrary array & displays each Book on the webpage via table row. Apparently this tries to read the entire array instead of one item at a time?
-function bookList(myLibrary) { // parameter may need to be "datarow" instead of "myLibrary". Change it in for of loop below as well if this is the case
+function bookList(datarow) {
   const table = document.querySelector('#book-info');
   const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
   if (firstEmptyRow === null) {
@@ -94,7 +94,7 @@ function bookList(myLibrary) { // parameter may need to be "datarow" instead of 
   }
 
   let i = 0;
-  for (cellvalue of myLibrary) {
+  for (cellvalue of datarow) {
     firstEmptyRow.children[i].textContent = cellvalue;
     i++;
   }
@@ -114,6 +114,7 @@ confirmBtn.addEventListener('click', (e) => {
   if(complete) {
     e.preventDefault();
     addBookToLibrary();
+    // dialog.close();
   }
 });
 
