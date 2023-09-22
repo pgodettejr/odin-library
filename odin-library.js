@@ -197,3 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // const newPages = parseInt(prompt("How many pages is the book?:"));
 // const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
 
+// data.textContent += myLibrary[i].title; // Tried this code and innerText, neither seem to work? Or the issue is addBookToLibrary()
+// data.textContent += myLibrary[i].author;
+// data.textContent += myLibrary[i].pages;
+// data.textContent += myLibrary[i].read;
+
+// tr.appendChild(td);
+
