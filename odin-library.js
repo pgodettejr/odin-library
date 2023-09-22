@@ -84,8 +84,44 @@ function AddTableARIA() {
 
 AddTableARIA();
 
-// Loops through myLibrary array & displays each Book on the webpage via table row. Apparently this tries to read the entire array instead of one item at a time?
-function bookList(datarow) {
+// Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row. Apparently this tries to read the entire array instead of one item at a time?
+function bookList(library) {
+  const table = document.querySelector('#book-info'); // Might not need this? It's not doing anything
+  const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
+  if (firstEmptyRow === null) {
+    console.log('No more available empty rows');
+    return;
+  }
+
+  // Tried changing all instances of myLibrary in this function to just library and added library as a parameter above
+  for (let i = 0; i < library.length; i++) {
+    const bookTitle = document.querySelector("td[data-cell=Title]");
+    const bookAuthor = document.querySelector("td[data-cell=Author]");
+    const bookPages = document.querySelector("td[data-cell=Pages]");
+    const bookFinish = document.querySelector("td[data-cell=Finished]");
+    
+    // Tried changing innerHTML to innerText instead for these
+    bookTitle.innerText += library[i].title;
+    bookAuthor.innerText += library[i].author;
+    bookPages.innerText += library[i].pages;
+    bookFinish.innerText += library[i].read;
+    
+    /* Might not even need these. Tried changing appendChild to textContent
+    tr.textContent(bookTitle);
+    tr.textContent(bookAuthor);
+    tr.textContent(bookPages);
+    tr.textContent(bookFinish); */
+  }
+
+  firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
+  dialog.reset();
+}
+
+bookList(myLibrary);
+
+// Old bookList functions
+
+/* function bookList(datarow) {
   const table = document.querySelector('#book-info');
   const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
   if (firstEmptyRow === null) {
@@ -101,7 +137,27 @@ function bookList(datarow) {
 
   firstEmptyRow.setAttribute('data-cell', 'false');
   dialog.reset();
+} */
+
+/* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
+
+function bookList(library) {
+  td[data-cell=true].textContent = '';
+  for (let i = 0; i < library.length; i++) {
+    const book = library[i];
+
+    // Everything below this line would have to change to accommodate table elements
+
+    const bookInfo = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read()}`;
+    const card = document.createElement('div');
+
+    card.classList.add('card');
+    card.textContent = bookInfo;
+    main.appendChild(card);
+  }
 }
+
+bookList(myLibrary); */
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
 bookBtn.addEventListener('click', () => {
@@ -141,33 +197,3 @@ document.addEventListener('DOMContentLoaded', () => {
 // const newPages = parseInt(prompt("How many pages is the book?:"));
 // const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
 
-// Old bookList function
-
-/* for (let i = 0; i < myLibrary.length; i++) {
-  data.textContent += myLibrary[i].title; // Tried this code and another method, neither seem to work? Or the issue is addBookToLibrary()
-  data.textContent += myLibrary[i].author;
-  data.textContent += myLibrary[i].pages;
-  data.textContent += myLibrary[i].read;
-
-  tr.appendChild(td);
-} */
-
-/* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
-
-function bookList(library) {
-  td[data-cell=true].textContent = '';
-  for (let i = 0; i < library.length; i++) {
-    const book = library[i];
-
-    // Everything below this line would have to change to accommodate table elements
-
-    const bookInfo = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read()}`;
-    const card = document.createElement('div');
-
-    card.classList.add('card');
-    card.textContent = bookInfo;
-    main.appendChild(card);
-  }
-}
-
-bookList(myLibrary); */
