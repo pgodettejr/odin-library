@@ -162,7 +162,7 @@ bookList(myLibrary); */
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
 bookBtn.addEventListener('click', () => {
   dialog.showModal();
-  // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
+  // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form or under addBookToLibrary()
 });
 
 // "Confirm" button functionality that checks that all book info was completed by user, then submits it to the table
