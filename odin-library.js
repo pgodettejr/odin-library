@@ -30,6 +30,11 @@ function Book(title, author, pages, read) {
 
 // Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
 function addBookToLibrary() {
+  let title = document.querySelector("#book-title").value;
+  let author = document.querySelector("#book-author").value;
+  let pages = document.querySelector("#total-pages").value;
+  let read = document.querySelector("#simple").value;
+
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
