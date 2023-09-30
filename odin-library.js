@@ -33,7 +33,7 @@ function addBookToLibrary() {
   let title = document.querySelector("#book-title").value;
   let author = document.querySelector("#book-author").value;
   let pages = document.querySelector("#total-pages").value;
-  let read = document.querySelector("#simple").value;
+  let read = document.querySelector("#finish").value;
 
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
