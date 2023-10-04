@@ -23,9 +23,9 @@ function Book(title, author, pages, read) {
       return 'ERROR!'
     }
   }
-  this.info = function() {
-    console.log(title, author, pages, read)
-  }
+  // this.info = function() {
+  //   console.log(title, author, pages, read)
+  // }
 }
 
 // Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
@@ -94,7 +94,7 @@ function bookList(library) {
   const table = document.querySelector('#book-info'); // Might not need this? It's not doing anything
   const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
   if (firstEmptyRow === null) {
-    console.log('No more available empty rows');
+    // console.log('No more available empty rows');
     return;
   }
 
@@ -122,7 +122,7 @@ function bookList(library) {
   dialog.reset();
 }
 
-bookList(myLibrary);
+// bookList(myLibrary);
 
 // Old bookList functions
 
