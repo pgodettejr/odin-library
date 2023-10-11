@@ -35,9 +35,10 @@ function addBookToLibrary() {
   let pages = document.querySelector("#total-pages").value;
   let read = document.querySelector("#finish").value;
 
+  // Trying spread syntax on the push method to see if it works/is needed
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
-    myLibrary.push(newBook);
+    myLibrary.push(...newBook);
     bookList();
   }
 }
