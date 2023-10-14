@@ -40,10 +40,9 @@ function addBookToLibrary() {
   // Trying spread syntax on the push method to see if it works/is needed
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
-    myLibrary.push(...newBook);
+    myLibrary.push(newBook);
     // library.replaceChildren();
     bookList();
-    console.log('Is this thing on?');
   }
 }
 
@@ -95,26 +94,26 @@ function AddTableARIA() {
 AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row. Apparently this tries to read the entire array instead of one item at a time?
-function bookList(library) {
+function bookList() {
   const table = document.querySelector('#book-info'); // Might not need this? It's not doing anything. Move it up to global scope DOMs?
   const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
   if (firstEmptyRow === null) {
-    // console.log('No more available empty rows');
-    return;
+    console.log('No more available empty rows');
   }
 
   // Tried changing all instances of myLibrary in this function to just library and added library as a parameter above. Remove library as an argument & change to array.length?
-  for (let i = 0; i < library.length; i++) {
+  // library is currently undefined & represents the empty display in other projects. The equivalent would have to be targeted in the DOM first, then used here.
+  for (let i = 0; i < table.length; i++) {
     const bookTitle = document.querySelector("td[data-cell=Title]");
     const bookAuthor = document.querySelector("td[data-cell=Author]");
     const bookPages = document.querySelector("td[data-cell=Pages]");
     const bookFinish = document.querySelector("td[data-cell=Finished]");
     
     // Tried changing innerHTML to innerText instead for these. Maybe textContent here instead?
-    bookTitle.innerText += library[i].title;
-    bookAuthor.innerText += library[i].author;
-    bookPages.innerText += library[i].pages;
-    bookFinish.innerText += library[i].read;
+    bookTitle.innerText += table[i].title;
+    bookAuthor.innerText += table[i].author;
+    bookPages.innerText += table[i].pages;
+    bookFinish.innerText += table[i].read;
     
     /* Might not even need these. Tried changing appendChild to textContent
     tr.textContent(bookTitle);
