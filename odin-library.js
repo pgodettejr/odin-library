@@ -2,8 +2,9 @@
 const main = document.querySelector(".container");
 const bookBtn = document.querySelector(".new-book");
 const dialog = document.querySelector("#form-dialog");
-const tableRow = document.querySelector("tr td[data-cell=true]")
-const removeBtn = document.querySelector(".remove")
+const table = document.querySelector('#book-table');
+const tableRow = document.querySelector("#book-table tr td[data-cell=true]");
+const removeBtn = document.querySelector(".remove");
 const confirmBtn = document.querySelector("#confirmBtn");
 const cancelBtn = document.querySelector("#cancelBtn");
 const outputBox = document.querySelector("output");
@@ -11,7 +12,7 @@ const outputBox = document.querySelector("output");
 // List of books in the library
 const myLibrary = [];
 
-// Constructor for making "Book" objects & reporting "Book" info
+// Constructor for making "Book" objects & reporting "Book" table
 function Book(title, author, pages, read) {
   this.title = title
   this.author = author
@@ -25,7 +26,7 @@ function Book(title, author, pages, read) {
       return 'ERROR!'
     }
   }
-  // this.info = function() {
+  // this.table = function() {
   //   console.log(title, author, pages, read)
   // }
 }
@@ -37,7 +38,6 @@ function addBookToLibrary() {
   let pages = document.querySelector("#total-pages").value;
   let read = document.querySelector("#finish").value;
 
-  // Trying spread syntax on the push method to see if it works/is needed
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
@@ -95,25 +95,25 @@ AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row. Apparently this tries to read the entire array instead of one item at a time?
 function bookList() {
-  const table = document.querySelector('#book-info'); // Might not need this? It's not doing anything. Move it up to global scope DOMs?
-  const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
-  if (firstEmptyRow === null) {
-    console.log('No more available empty rows');
-  }
+  // const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
+  // if (firstEmptyRow === null) {
+  //   console.log('No more available empty rows');
+  // }
 
-  // Tried changing all instances of myLibrary in this function to just library and added library as a parameter above. Remove library as an argument & change to array.length?
-  // library is currently undefined & represents the empty display in other projects. The equivalent would have to be targeted in the DOM first, then used here.
+  // Tried table & tableRow. Go back to myLibrary? (equivalent of array.length)
   for (let i = 0; i < table.length; i++) {
     const bookTitle = document.querySelector("td[data-cell=Title]");
     const bookAuthor = document.querySelector("td[data-cell=Author]");
     const bookPages = document.querySelector("td[data-cell=Pages]");
     const bookFinish = document.querySelector("td[data-cell=Finished]");
     
-    // Tried changing innerHTML to innerText instead for these. Maybe textContent here instead?
-    bookTitle.innerText += table[i].title;
-    bookAuthor.innerText += table[i].author;
-    bookPages.innerText += table[i].pages;
-    bookFinish.innerText += table[i].read;
+    if (tableRow === "") {
+        // Tried changing innerHTML to innerText instead for these. Maybe textContent here instead? Tried putting all this under an "if" statement with an empty row condition
+      bookTitle.innerText += table[i].title;
+      bookAuthor.innerText += table[i].author;
+      bookPages.innerText += table[i].pages;
+      bookFinish.innerText += table[i].read;
+    }
     
     /* Might not even need these. Tried changing appendChild to textContent
     tr.textContent(bookTitle);
@@ -122,8 +122,7 @@ function bookList() {
     tr.textContent(bookFinish); */
   }
 
-  firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
-  dialog.reset();
+  // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
 }
 
 // bookList(myLibrary);
@@ -131,8 +130,8 @@ function bookList() {
 // Old bookList functions
 
 /* function bookList(datarow) {
-  const table = document.querySelector('#book-info');
-  const firstEmptyRow = document.querySelector('#book-info tr td[data-cell=true]');
+  const table = document.querySelector('#book-table');
+  const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
   if (firstEmptyRow === null) {
     console.log('No more available empty rows');
     return;
@@ -184,17 +183,18 @@ bookBtn.addEventListener('click', () => {
   // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form or under addBookToLibrary()
 });
 
-// "Confirm" button functionality that checks that all book info was completed by user, then submits it to the table
+// "Confirm" button functionality that checks that all book table was completed by user, then submits it to the table
 confirmBtn.addEventListener('click', (e) => {
   let complete = document.getElementById("book-form").checkValidity();
   if(complete) {
     e.preventDefault();
     addBookToLibrary();
-    // dialog.close();
+    dialog.reset();
+    // dialog.close(all form elements filled in/selected.value);
   }
 });
 
-// "Cancel" button functionality that deletes all book info that was entered and closes the form
+// "Cancel" button functionality that deletes all book table that was entered and closes the form
 cancelBtn.addEventListener('click', () => {
   dialog.close();
 });
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Old & incorrect code
 
 // const book = new Book('Wild at Heart', 'John Eldredge', '234', 'yes')
-// book.info();
+// book.table();
 
 // const data = document.querySelector(".card");
 
