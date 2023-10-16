@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <h1>The Library</h1>
-    <table id="book-info">
+    <table id="book-table">
       <caption>Bookshelf</caption>
       <tr>
         <th>Title</th>
@@ -19,7 +19,7 @@
         <th>Remove</th>
       </tr>
 
-      <tr>
+      <tr class="book-info">
         <td data-cell="Title" id="title-1"></td>
         <td data-cell="Author" id="author-1"></td>
         <td data-cell="Pages" id="pages-1"></td>
@@ -29,7 +29,7 @@
         </td> 
       </tr>
 
-      <tr>
+      <tr class="book-info">
         <td data-cell="Title" id="title-2"></td>
         <td data-cell="Author" id="author-2"></td>
         <td data-cell="Pages" id="pages-2"></td>
@@ -39,7 +39,7 @@
         </td> 
       </tr>
 
-      <tr>
+      <tr class="book-info">
         <td data-cell="Title" id="title-3"></td>
         <td data-cell="Author" id="author-3"></td>
         <td data-cell="Pages" id="pages-3"></td>
@@ -49,7 +49,7 @@
         </td> 
       </tr>
 
-      <tr>
+      <tr class="book-info">
         <td data-cell="Title" id="title-4"></td>
         <td data-cell="Author" id="author-4"></td>
         <td data-cell="Pages" id="pages-4"></td>
@@ -59,7 +59,7 @@
         </td> 
       </tr>
 
-      <tr>
+      <tr class="book-info">
         <td data-cell="Title" id="title-5"></td>
         <td data-cell="Author" id="author-5"></td>
         <td data-cell="Pages" id="pages-5"></td>
@@ -97,7 +97,7 @@
             <option value="No">No</option>
           </select>
         </div>
-
+        <!-- Does the Confirm button also need formmethod? -->
         <div class="form-buttons">
           <button type="button" id="confirmBtn">Confirm</button>
           <button id="cancelBtn" formmethod="dialog">Cancel</button>
