@@ -38,7 +38,7 @@ function addBookToLibrary() {
   let read = document.querySelector("#finish").value;
 
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
-    const newBook = new Book(title, author, pages, read);
+    const newBook = new Book(title, author, pages, read); // Once the function gets to this line, it posts "read: f" for read status as the object property. Need to fix
     myLibrary.push(newBook);
     // tableRow.replaceChildren();
     bookDisplay();
@@ -52,8 +52,6 @@ function addBookToLibrary() {
     break;
   }
 } */
-
-// addBookToLibrary("Wild at Heart", "John Eldredge", "234", "Yes");
 
 // Delete this or comment it out if we have to rework HTML to show just the table header (rows/cells get filled in only after user input)
 function AddTableARIA() {
@@ -101,19 +99,17 @@ function bookDisplay() {
   //   console.log('No more available empty rows');
   // }
 
-  // Tried myLibrary (which reads entire array, not one object/item at a time), table & tableRow (TypeError: can't read properties of null). None work. for...in loop?
-  // Find a way to push the properties iterated in the for...in loop from myLibrary/addBookToLibrary() onto the table rows as text (after rewriting into for...in loop below)
   for (const book in myLibrary) {
-    const bookTitle = document.createElement("td[data-cell=Title]");
-    const bookAuthor = document.createElement("td[data-cell=Author]");
-    const bookPages = document.createElement("td[data-cell=Pages]");
-    const bookFinish = document.createElement("td[data-cell=Finished]");
+    const bookTitle = document.createElement("td");
+    const bookAuthor = document.createElement("td");
+    const bookPages = document.createElement("td");
+    const bookFinish = document.createElement("td");
 
-    // In case the above doesn't work
-    // bookTitle.dataset.cell = Title;
-    // bookAuthor.dataset.cell = Author;
-    // bookPages.dataset.cell = Pages;
-    // bookFinish.dataset.cell = Finished;
+    // Putting the dataset info in createElement parentheses above didn't work
+    bookTitle.setAttribute("data-cell", "Title");
+    bookAuthor.setAttribute("data-cell", "Author");
+    bookPages.setAttribute("data-cell", "Pages");
+    bookFinish.setAttribute("data-cell", "Finished");
 
     const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
     const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
@@ -130,6 +126,7 @@ function bookDisplay() {
     removeBtn.appendChild(removeText);
     removeBtn.classList.add("delete");
 
+    // Remove button seems to be created first. Should all the remove button code go under this instead of above?
     tableRow.appendChild(bookTitle);
     tableRow.appendChild(bookAuthor);
     tableRow.appendChild(bookPages);
@@ -142,31 +139,6 @@ function bookDisplay() {
       clearRow();
     });
   }
-
-  /* for (let i = 0; i < table.length; i++) {
-    const bookTitle = document.querySelector("td[data-cell=Title]");
-    const bookAuthor = document.querySelector("td[data-cell=Author]");
-    const bookPages = document.querySelector("td[data-cell=Pages]");
-    const bookFinish = document.querySelector("td[data-cell=Finished]");
-    
-    if (tableRow === "") {
-      
-      // Tried putting all this under an "if" statement with an empty row condition
-
-      bookTitle.innerText += table[i].title;
-      bookAuthor.innerText += table[i].author;
-      bookPages.innerText += table[i].pages;
-      bookFinish.innerText += table[i].read;
-    }
-    
-    // Might not even need these. Tried changing appendChild to textContent
-
-    tr.textContent(bookTitle);
-    tr.textContent(bookAuthor);
-    tr.textContent(bookPages);
-    tr.textContent(bookFinish);
-  } */
-
   // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
   // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
 }
@@ -208,7 +180,31 @@ function bookDisplay(library) {
     card.textContent = bookInfo;
     main.appendChild(card);
   }
-}
+} */
+
+/* for (let i = 0; i < table.length; i++) {
+    const bookTitle = document.querySelector("td[data-cell=Title]");
+    const bookAuthor = document.querySelector("td[data-cell=Author]");
+    const bookPages = document.querySelector("td[data-cell=Pages]");
+    const bookFinish = document.querySelector("td[data-cell=Finished]");
+    
+    if (tableRow === "") {
+      
+      // Tried putting all this under an "if" statement with an empty row condition
+
+      bookTitle.innerText += table[i].title;
+      bookAuthor.innerText += table[i].author;
+      bookPages.innerText += table[i].pages;
+      bookFinish.innerText += table[i].read;
+    }
+    
+    // Might not even need these. Tried changing appendChild to textContent
+
+    tr.textContent(bookTitle);
+    tr.textContent(bookAuthor);
+    tr.textContent(bookPages);
+    tr.textContent(bookFinish);
+  }
 
 bookDisplay(myLibrary); */
 
