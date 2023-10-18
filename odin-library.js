@@ -93,14 +93,15 @@ function AddTableARIA() {
 
 AddTableARIA();
 
-// Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row. Apparently this tries to read the entire array instead of one item at a time?
+// Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
 function bookList() {
   // const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
   // if (firstEmptyRow === null) {
   //   console.log('No more available empty rows');
   // }
 
-  // Tried table & tableRow. Go back to myLibrary? (equivalent of array.length)
+  // Tried myLibrary (which reads entire array, not one object/item at a time), table & tableRow (TypeError: can't read properties of null). None work. for...in loop?
+  // Find a way to push the properties iterated in the for...in loop from myLibrary/addBookToLibrary() onto the table rows as text (after rewriting into for...in loop below)
   for (let i = 0; i < table.length; i++) {
     const bookTitle = document.querySelector("td[data-cell=Title]");
     const bookAuthor = document.querySelector("td[data-cell=Author]");
@@ -108,7 +109,7 @@ function bookList() {
     const bookFinish = document.querySelector("td[data-cell=Finished]");
     
     if (tableRow === "") {
-        // Tried changing innerHTML to innerText instead for these. Maybe textContent here instead? Tried putting all this under an "if" statement with an empty row condition
+        // Tried putting all this under an "if" statement with an empty row condition
       bookTitle.innerText += table[i].title;
       bookAuthor.innerText += table[i].author;
       bookPages.innerText += table[i].pages;
@@ -121,7 +122,7 @@ function bookList() {
     tr.textContent(bookPages);
     tr.textContent(bookFinish); */
   }
-
+  // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
   // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
 }
 
@@ -130,7 +131,6 @@ function bookList() {
 // Old bookList functions
 
 /* function bookList(datarow) {
-  const table = document.querySelector('#book-table');
   const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
   if (firstEmptyRow === null) {
     console.log('No more available empty rows');
@@ -180,7 +180,6 @@ removeBtn.addEventListener('click', () => {
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
 bookBtn.addEventListener('click', () => {
   dialog.showModal();
-  // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form or under addBookToLibrary()
 });
 
 // "Confirm" button functionality that checks that all book table was completed by user, then submits it to the table
@@ -189,8 +188,8 @@ confirmBtn.addEventListener('click', (e) => {
   if(complete) {
     e.preventDefault();
     addBookToLibrary();
-    dialog.reset();
-    // dialog.close(all form elements filled in/selected.value);
+    // e.target.dataset.cell += innerText; - This may need to be under addBookToLibrary()
+    // dialog.close(all form elements filled in/selected.value); Try to call all Book elements as arguments for this?
   }
 });
 
