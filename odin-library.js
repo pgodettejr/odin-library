@@ -3,7 +3,7 @@ const main = document.querySelector(".container");
 const bookBtn = document.querySelector(".new-book");
 const dialog = document.querySelector("#form-dialog");
 const table = document.querySelector('#book-table');
-const tableRow = document.querySelector("#book-table tr td[data-cell=true]");
+const tableRow = document.querySelector(".book-info");
 const removeBtn = document.querySelector(".remove");
 const confirmBtn = document.querySelector("#confirmBtn");
 const cancelBtn = document.querySelector("#cancelBtn");
@@ -41,8 +41,8 @@ function addBookToLibrary() {
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    // library.replaceChildren();
-    bookList();
+    // tableRow.replaceChildren();
+    bookDisplay();
   }
 }
 
@@ -53,6 +53,8 @@ function addBookToLibrary() {
     break;
   }
 } */
+
+// addBookToLibrary("Wild at Heart", "John Eldredge", "234", "Yes");
 
 // Delete this or comment it out if we have to rework HTML to show just the table header (rows/cells get filled in only after user input)
 function AddTableARIA() {
@@ -94,7 +96,7 @@ function AddTableARIA() {
 AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
-function bookList() {
+function bookDisplay() {
   // const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
   // if (firstEmptyRow === null) {
   //   console.log('No more available empty rows');
@@ -109,7 +111,7 @@ function bookList() {
     const bookFinish = document.querySelector("td[data-cell=Finished]");
     
     if (tableRow === "") {
-        // Tried putting all this under an "if" statement with an empty row condition
+      // Tried putting all this under an "if" statement with an empty row condition
       bookTitle.innerText += table[i].title;
       bookAuthor.innerText += table[i].author;
       bookPages.innerText += table[i].pages;
@@ -122,15 +124,40 @@ function bookList() {
     tr.textContent(bookPages);
     tr.textContent(bookFinish); */
   }
+
+  /* for (let i = 0; i < table.length; i++) {
+    const bookTitle = document.querySelector("td[data-cell=Title]");
+    const bookAuthor = document.querySelector("td[data-cell=Author]");
+    const bookPages = document.querySelector("td[data-cell=Pages]");
+    const bookFinish = document.querySelector("td[data-cell=Finished]");
+    
+    if (tableRow === "") {
+      
+      // Tried putting all this under an "if" statement with an empty row condition
+
+      bookTitle.innerText += table[i].title;
+      bookAuthor.innerText += table[i].author;
+      bookPages.innerText += table[i].pages;
+      bookFinish.innerText += table[i].read;
+    }
+    
+    // Might not even need these. Tried changing appendChild to textContent
+
+    tr.textContent(bookTitle);
+    tr.textContent(bookAuthor);
+    tr.textContent(bookPages);
+    tr.textContent(bookFinish);
+  } */
+
   // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
   // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
 }
 
-// bookList(myLibrary);
+// bookDisplay(myLibrary);
 
-// Old bookList functions
+// Old bookDisplay functions
 
-/* function bookList(datarow) {
+/* function bookDisplay(datarow) {
   const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
   if (firstEmptyRow === null) {
     console.log('No more available empty rows');
@@ -149,7 +176,7 @@ function bookList() {
 
 /* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
 
-function bookList(library) {
+function bookDisplay(library) {
   td[data-cell=true].textContent = '';
   for (let i = 0; i < library.length; i++) {
     const book = library[i];
@@ -165,7 +192,7 @@ function bookList(library) {
   }
 }
 
-bookList(myLibrary); */
+bookDisplay(myLibrary); */
 
 // Clears table row of all user entered data
 function clearRow() {
