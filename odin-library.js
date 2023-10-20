@@ -227,7 +227,7 @@ bookDisplay(myLibrary); */
 // Clears table row of all user entered data
 // Works but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
 function clearRow() {
-  tableRow.remove(); 
+  book.remove(); 
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
