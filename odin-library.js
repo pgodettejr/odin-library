@@ -16,7 +16,7 @@ function Book(title, author, pages, read) {
   this.title = title
   this.author = author
   this.pages = pages
-  this.read = function() {
+  this.read = function() { // This function literally shows up on the table when the elements are added instead of actual "Yes" or "No" that user inputted in drop-down form
     if (read === 'Yes') {
       return 'Yes';
     } else if (read === 'No') {
@@ -104,33 +104,35 @@ function bookDisplay() {
     const bookAuthor = document.createElement("td");
     const bookPages = document.createElement("td");
     const bookFinish = document.createElement("td");
+    const bookDelete = document.createElement("td");
 
-    // Putting the dataset info in createElement parentheses above didn't work
     bookTitle.setAttribute("data-cell", "Title");
     bookAuthor.setAttribute("data-cell", "Author");
     bookPages.setAttribute("data-cell", "Pages");
     bookFinish.setAttribute("data-cell", "Finished");
+    bookDelete.setAttribute("data-cell", "Delete");
 
     const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
     const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
     const bookPagesInfo = document.createTextNode(`${myLibrary[book].pages}`);
     const bookFinishInfo = document.createTextNode(`${myLibrary[book].read}`);
 
+    const removeBtn = document.createElement("button");
+    const removeText = document.createTextNode("REMOVE");
+    removeBtn.classList.add(".remove");
+    removeBtn.appendChild(removeText);
+
     bookTitle.appendChild(bookTitleInfo);
     bookAuthor.appendChild(bookAuthorInfo);
     bookPages.appendChild(bookPagesInfo);
     bookFinish.appendChild(bookFinishInfo);
+    bookDelete.appendChild(removeBtn);
 
-    const removeBtn = document.querySelector(".remove");
-    let removeText = document.createTextNode("REMOVE");
-    removeBtn.appendChild(removeText);
-    removeBtn.classList.add("delete");
-
-    // Remove button seems to be created first. Should all the remove button code go under this instead of above?
     tableRow.appendChild(bookTitle);
     tableRow.appendChild(bookAuthor);
     tableRow.appendChild(bookPages);
     tableRow.appendChild(bookFinish);
+    tableRow.appendChild(bookDelete);
 
     table.appendChild(tableRow);
     
