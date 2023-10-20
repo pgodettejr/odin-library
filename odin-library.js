@@ -16,15 +16,8 @@ function Book(title, author, pages, read) {
   this.title = title
   this.author = author
   this.pages = pages
-  this.read = function() { // This function literally shows up on the table when the elements are added instead of actual "Yes" or "No" that user inputted in drop-down form
-    if (read === 'Yes') {
-      return 'Yes';
-    } else if (read === 'No') {
-      return 'No';
-    } else {
-      return 'ERROR!'
-    }
-  }
+  this.read = read
+
   // this.table = function() {
   //   console.log(title, author, pages, read)
   // }
@@ -38,9 +31,9 @@ function addBookToLibrary() {
   let read = document.querySelector("#finish").value;
 
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
-    const newBook = new Book(title, author, pages, read); // Once the function gets to this line, it posts "read: f" for read status as the object property. Need to fix
+    const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    // tableRow.replaceChildren();
+    // tableRow.replaceChildren(); Does this solve the "same book in the array" issue? (See createTextNode notes in bookDisplay below)
     bookDisplay();
   }
 }
@@ -93,8 +86,6 @@ function AddTableARIA() {
 AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
-// Stays on the first object in the array instead of moving to the next one when a second/third/etc book is added in the dialog form.
-// Array either has to clear once book is added or this needs to be able to skip to the latest object in the array every time
 function bookDisplay() {
   // const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
   // if (firstEmptyRow === null) {
@@ -114,6 +105,9 @@ function bookDisplay() {
     bookFinish.setAttribute("data-cell", "Finished");
     bookDelete.setAttribute("data-cell", "Delete");
 
+    // Starts on the first object in the array again instead of skipping to the next one when a second/third/etc book is added in the dialog form
+    // Will THEN add the second object in the array (loops through the entire array issue instead of just one/latest/last object)
+    // Array either has to clear once book is added or this needs to be able to skip to the latest object in the array every time
     const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
     const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
     const bookPagesInfo = document.createTextNode(`${myLibrary[book].pages}`);
@@ -121,7 +115,7 @@ function bookDisplay() {
 
     const removeBtn = document.createElement("button");
     const removeText = document.createTextNode("REMOVE");
-    removeBtn.classList.add(".remove");
+    removeBtn.classList.add(".remove"); // Either need a CSS psuedo-selector or dynamically add CSS styling here in order to shrink Remove button to proper size on current CSS
     removeBtn.appendChild(removeText);
 
     bookTitle.appendChild(bookTitleInfo);
@@ -130,6 +124,7 @@ function bookDisplay() {
     bookFinish.appendChild(bookFinishInfo);
     bookDelete.appendChild(removeBtn);
 
+    // When a second book is added, the table row elements appear to the right of the first row instead of under the first row. CSS positioning?
     tableRow.appendChild(bookTitle);
     tableRow.appendChild(bookAuthor);
     tableRow.appendChild(bookPages);
