@@ -92,6 +92,22 @@ function bookDisplay() {
   //   console.log('No more available empty rows');
   // }
 
+  /* JayBee possible solution to solve "full array posting" error
+  const books = document.querySelector(".books"); --> His "books" is just an empty div with a class. Similar to our empty tr with a class
+
+  // Loops over the library array and displays to cards
+	myLibrary.forEach(myLibrary => {
+		const card = document.createElement("div");
+		card.classList.add("card");
+		books.appendChild(card);
+		for (let key in myLibrary) {
+			console.log(`${key}: ${myLibrary[key]}`);
+			const para = document.createElement("p");
+			para.textContent = (`${key}: ${myLibrary[key]}`);
+			card.appendChild(para);
+		}
+	}) */
+
   for (const book in myLibrary) {
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
@@ -181,6 +197,7 @@ function bookDisplay(library) {
   }
 } */
 
+
 /* for (let i = 0; i < table.length; i++) {
     const bookTitle = document.querySelector("td[data-cell=Title]");
     const bookAuthor = document.querySelector("td[data-cell=Author]");
@@ -207,9 +224,10 @@ function bookDisplay(library) {
 
 bookDisplay(myLibrary); */
 
-// Clears table row of all user entered data. Not working currently due to Uncaught TypeError: tableRow.removeChildren is not a function
+// Clears table row of all user entered data
+// Works but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
 function clearRow() {
-  tableRow.removeChildren(); 
+  tableRow.remove(); 
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
