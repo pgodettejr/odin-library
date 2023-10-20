@@ -33,7 +33,7 @@ function addBookToLibrary() {
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    // tableRow.replaceChildren(); Does this solve the "same book in the array" issue? (See createTextNode notes in bookDisplay below)
+    // tableRow.replaceChildren(); - Not a true solution. Deletes current table row of book info, then re-added in bookDisplay later with other books (See createTextNode notes)
     bookDisplay();
   }
 }
@@ -242,7 +242,7 @@ confirmBtn.addEventListener('click', (e) => {
     e.preventDefault();
     addBookToLibrary();
     // e.target.dataset.cell += innerText; - This may need to be under addBookToLibrary()
-    // dialog.close(all form elements filled in/selected.value); Try to call all Book elements as arguments for this?
+    dialog.close() // dialog.close(all form elements filled in/selected.value); Try to call all Book elements as arguments for this?
   }
 });
 
