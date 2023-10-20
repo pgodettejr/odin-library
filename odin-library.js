@@ -93,6 +93,8 @@ function AddTableARIA() {
 AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
+// Stays on the first object in the array instead of moving to the next one when a second/third/etc book is added in the dialog form.
+// Array either has to clear once book is added or this needs to be able to skip to the latest object in the array every time
 function bookDisplay() {
   // const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
   // if (firstEmptyRow === null) {
@@ -210,9 +212,9 @@ function bookDisplay(library) {
 
 bookDisplay(myLibrary); */
 
-// Clears table row of all user entered data
+// Clears table row of all user entered data. Not working currently due to Uncaught TypeError: tableRow.removeChildren is not a function
 function clearRow() {
-  tableRow.removeChildren();
+  tableRow.removeChildren(); 
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
