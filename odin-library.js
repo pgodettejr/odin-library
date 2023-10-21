@@ -96,6 +96,11 @@ function bookDisplay() {
   /* JayBee possible solution to solve "full array posting" error. All text comes up 'undefined' when for...in loop is simply added under forEach method with no other modifications
   const books = document.querySelector(".books"); --> His "books" is just an empty div with a class. Similar to our empty tr with a class
 
+  // Possibly removes all previously displayed table rows before looping over the myLibrary array again
+  for (let i = 0; i < tableRow.length; i++) {
+    tableRow[i].remove();
+  }
+
   // Loops over the library array and displays to cards
 	myLibrary.forEach(myLibrary => {
 		const card = document.createElement("div");
@@ -108,6 +113,7 @@ function bookDisplay() {
 			card.appendChild(para);
 		}
 	}) */
+
   myLibrary.forEach(myLibrary => { // ReferenceError: book is not defined; when for...in loop is taken out
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
@@ -279,7 +285,7 @@ bookDisplay(myLibrary); */
 // Clears table row of all user entered data
 // tableRow.remove() works, but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
 function clearRow() {
-  Book.remove(); // possibly try table.removeChild(tableRow)
+  Book.remove(); // possibly try table.removeChild(tableRow) or tableRow.reset() or document.querySelector(".book-info").reset();
 
 // This would remove all children from an element
 //   const element = document.getElementById("idOfParent");
@@ -301,12 +307,14 @@ confirmBtn.addEventListener('click', (e) => {
     e.preventDefault();
     addBookToLibrary();
     // e.target.dataset.cell += innerText; - This may need to be under addBookToLibrary()
+    // document.getElementById("book-form").reset(); --> Use this to reset form itself before closing?
     dialog.close() // dialog.close(all form elements filled in/selected.value); Try to call all Book elements as arguments for this?
   }
 });
 
 // "Cancel" button functionality that deletes all book table that was entered and closes the form
 cancelBtn.addEventListener('click', () => {
+  // document.getElementById("book-form").reset(); --> Use this to reset form itself before closing?
   dialog.close();
 });
 
