@@ -8,11 +8,6 @@ const confirmBtn = document.querySelector("#confirmBtn");
 const cancelBtn = document.querySelector("#cancelBtn");
 const outputBox = document.querySelector("output");
 
-let title = document.querySelector("#book-title").value;
-let author = document.querySelector("#book-author").value;
-let pages = document.querySelector("#total-pages").value;
-let read = document.querySelector("#finish").value;
-
 // List of books in the library
 const myLibrary = [];
 
@@ -30,11 +25,11 @@ function Book(title, author, pages, read) {
 
 // Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
 function addBookToLibrary() {
-  // Make these global so the forEach function in bookDisplay below works? Debug and see how it affects app functionality
-  // let title = document.querySelector("#book-title").value;
-  // let author = document.querySelector("#book-author").value;
-  // let pages = document.querySelector("#total-pages").value;
-  // let read = document.querySelector("#finish").value;
+  // Making these global doesn't work. User input never posts to table.
+  let title = document.querySelector("#book-title").value;
+  let author = document.querySelector("#book-author").value;
+  let pages = document.querySelector("#total-pages").value;
+  let read = document.querySelector("#finish").value;
 
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
@@ -113,54 +108,53 @@ function bookDisplay() {
 			card.appendChild(para);
 		}
 	}) */
-  myLibrary.forEach(myLibrary => {
-    for (const book in myLibrary) {
-      const bookTitle = document.createElement("td");
-      const bookAuthor = document.createElement("td");
-      const bookPages = document.createElement("td");
-      const bookFinish = document.createElement("td");
-      const bookDelete = document.createElement("td");
-  
-      bookTitle.setAttribute("data-cell", "Title");
-      bookAuthor.setAttribute("data-cell", "Author");
-      bookPages.setAttribute("data-cell", "Pages");
-      bookFinish.setAttribute("data-cell", "Finished");
-      bookDelete.setAttribute("data-cell", "Delete");
-  
-      // Revisits the first object in the array instead of skipping to the next one when a second/third/etc book is added in the dialog form
-      // Will THEN add the second object in the array (loops through the entire array issue instead of just one/latest/last object)
-      // Array either has to clear once book is added or this needs to be able to skip to the latest object in the array every time
-      const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
-      const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
-      const bookPagesInfo = document.createTextNode(`${myLibrary[book].pages}`);
-      const bookFinishInfo = document.createTextNode(`${myLibrary[book].read}`);
-  
-      const removeBtn = document.createElement("button");
-      const removeText = document.createTextNode("REMOVE");
-      removeBtn.classList.add(".remove"); // Either need a CSS psuedo-selector or dynamically add CSS styling here in order to shrink Remove button to proper size on current CSS
-      removeBtn.appendChild(removeText);
-  
-      bookTitle.appendChild(bookTitleInfo);
-      bookAuthor.appendChild(bookAuthorInfo);
-      bookPages.appendChild(bookPagesInfo);
-      bookFinish.appendChild(bookFinishInfo);
-      bookDelete.appendChild(removeBtn);
-  
-      // When a second book is added, the table row elements appear to the right of the first row instead of under the first row. CSS positioning?
-      tableRow.appendChild(bookTitle);
-      tableRow.appendChild(bookAuthor);
-      tableRow.appendChild(bookPages);
-      tableRow.appendChild(bookFinish);
-      tableRow.appendChild(bookDelete);
-  
-      table.appendChild(tableRow);
-      
-      // Remove button functionality
-      removeBtn.addEventListener('click', () => {
-        clearRow();
-      });
-    }
+  myLibrary.forEach(myLibrary => { // ReferenceError: book is not defined; when for...in loop is taken out
+    const bookTitle = document.createElement("td");
+    const bookAuthor = document.createElement("td");
+    const bookPages = document.createElement("td");
+    const bookFinish = document.createElement("td");
+    const bookDelete = document.createElement("td");
+
+    bookTitle.setAttribute("data-cell", "Title");
+    bookAuthor.setAttribute("data-cell", "Author");
+    bookPages.setAttribute("data-cell", "Pages");
+    bookFinish.setAttribute("data-cell", "Finished");
+    bookDelete.setAttribute("data-cell", "Delete");
+
+    // Revisits the first object in the array instead of skipping to the next one when a second/third/etc book is added in the dialog form
+    // Will THEN add the second object in the array (loops through the entire array issue instead of just one/latest/last object)
+    // Array either has to clear once book is added or this needs to be able to skip to the latest object in the array every time
+    const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
+    const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
+    const bookPagesInfo = document.createTextNode(`${myLibrary[book].pages}`);
+    const bookFinishInfo = document.createTextNode(`${myLibrary[book].read}`);
+
+    const removeBtn = document.createElement("button");
+    const removeText = document.createTextNode("REMOVE");
+    removeBtn.classList.add(".remove"); // Either need a CSS psuedo-selector or dynamically add CSS styling here in order to shrink Remove button to proper size on current CSS
+    removeBtn.appendChild(removeText);
+
+    bookTitle.appendChild(bookTitleInfo);
+    bookAuthor.appendChild(bookAuthorInfo);
+    bookPages.appendChild(bookPagesInfo);
+    bookFinish.appendChild(bookFinishInfo);
+    bookDelete.appendChild(removeBtn);
+
+    // When a second book is added, the table row elements appear to the right of the first row instead of under the first row. CSS positioning?
+    tableRow.appendChild(bookTitle);
+    tableRow.appendChild(bookAuthor);
+    tableRow.appendChild(bookPages);
+    tableRow.appendChild(bookFinish);
+    tableRow.appendChild(bookDelete);
+
+    table.appendChild(tableRow);
+    
+    // Remove button functionality
+    removeBtn.addEventListener('click', () => {
+      clearRow();
+    });
   })
+  
   // for (const book in myLibrary) {
   //   const bookTitle = document.createElement("td");
   //   const bookAuthor = document.createElement("td");
