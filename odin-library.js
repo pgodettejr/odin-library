@@ -96,7 +96,8 @@ function bookDisplay() {
   /* JayBee possible solution to solve "full array posting" error. All text comes up 'undefined' when for...in loop is simply added under forEach method with no other modifications
   const books = document.querySelector(".books"); --> His "books" is just an empty div with a class. Similar to our empty tr with a class
 
-  // Possibly removes all previously displayed table rows before looping over the myLibrary array again
+  // Possibly removes all previously displayed table rows before looping over the myLibrary array again. May need to querySelectorAll table rows
+  console.log("Show me node count of current table divs...", tableRow);
   for (let i = 0; i < tableRow.length; i++) {
     tableRow[i].remove();
   }
