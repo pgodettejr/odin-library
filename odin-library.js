@@ -93,14 +93,8 @@ function bookDisplay() {
   //   console.log('No more available empty rows');
   // }
 
-  /* JayBee possible solution to solve "full array posting" error. All text comes up 'undefined' when for...in loop is simply added under forEach method with no other modifications
+  /* JayBee possible solution
   const books = document.querySelector(".books"); --> His "books" is just an empty div with a class. Similar to our empty tr with a class
-
-  // Possibly removes all previously displayed table rows before looping over the myLibrary array again. May need to querySelectorAll table rows
-  console.log("Show me node count of current table divs...", tableRow);
-  for (let i = 0; i < tableRow.length; i++) {
-    tableRow[i].remove();
-  }
 
   // Loops over the library array and displays to cards
 	myLibrary.forEach(myLibrary => {
@@ -115,7 +109,9 @@ function bookDisplay() {
 		}
 	}) */
 
-  myLibrary.forEach(myLibrary => { // ReferenceError: book is not defined; when for...in loop is taken out
+  // const tableRows = document.querySelectorAll(".book-info");
+  
+  for (const book in myLibrary) {
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
     const bookPages = document.createElement("td");
@@ -160,54 +156,16 @@ function bookDisplay() {
     removeBtn.addEventListener('click', () => {
       clearRow();
     });
-  })
-  
-  // for (const book in myLibrary) {
-  //   const bookTitle = document.createElement("td");
-  //   const bookAuthor = document.createElement("td");
-  //   const bookPages = document.createElement("td");
-  //   const bookFinish = document.createElement("td");
-  //   const bookDelete = document.createElement("td");
 
-  //   bookTitle.setAttribute("data-cell", "Title");
-  //   bookAuthor.setAttribute("data-cell", "Author");
-  //   bookPages.setAttribute("data-cell", "Pages");
-  //   bookFinish.setAttribute("data-cell", "Finished");
-  //   bookDelete.setAttribute("data-cell", "Delete");
+    // Possible solution on functionality for all remove buttons created using Event Delegation. removeButtons would only be used if we end up doing forEach method
+    // const removeButtons = document.querySelectorAll(".remove");
 
-  //   // Revisits the first object in the array instead of skipping to the next one when a second/third/etc book is added in the dialog form
-  //   // Will THEN add the second object in the array (loops through the entire array issue instead of just one/latest/last object)
-  //   // Array either has to clear once book is added or this needs to be able to skip to the latest object in the array every time
-  //   const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
-  //   const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
-  //   const bookPagesInfo = document.createTextNode(`${myLibrary[book].pages}`);
-  //   const bookFinishInfo = document.createTextNode(`${myLibrary[book].read}`);
-
-  //   const removeBtn = document.createElement("button");
-  //   const removeText = document.createTextNode("REMOVE");
-  //   removeBtn.classList.add(".remove"); // Either need a CSS psuedo-selector or dynamically add CSS styling here in order to shrink Remove button to proper size on current CSS
-  //   removeBtn.appendChild(removeText);
-
-  //   bookTitle.appendChild(bookTitleInfo);
-  //   bookAuthor.appendChild(bookAuthorInfo);
-  //   bookPages.appendChild(bookPagesInfo);
-  //   bookFinish.appendChild(bookFinishInfo);
-  //   bookDelete.appendChild(removeBtn);
-
-  //   // When a second book is added, the table row elements appear to the right of the first row instead of under the first row. CSS positioning?
-  //   tableRow.appendChild(bookTitle);
-  //   tableRow.appendChild(bookAuthor);
-  //   tableRow.appendChild(bookPages);
-  //   tableRow.appendChild(bookFinish);
-  //   tableRow.appendChild(bookDelete);
-
-  //   table.appendChild(tableRow);
-    
-  //   // Remove button functionality
-  //   removeBtn.addEventListener('click', () => {
-  //     clearRow();
-  //   });
-  // }
+    // table.addEventListener("click", (e) => {
+    //   if (e.target.tagName === 'BUTTON') {
+    //     clearRow();
+    //   }
+    // });
+  }
   // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
   // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
 
@@ -286,14 +244,13 @@ bookDisplay(myLibrary); */
 // Clears table row of all user entered data
 // tableRow.remove() works, but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
 function clearRow() {
-  Book.remove(); // possibly try table.removeChild(tableRow) or tableRow.reset() or document.querySelector(".book-info").reset();
+  tableRow.reset(); // possibly try table.removeChild(tableRow) or document.querySelector(".book-info").reset();
 
 // This would remove all children from an element
 //   const element = document.getElementById("idOfParent");
 //   while (element.firstChild) {
 //     element.removeChild(element.firstChild);
 // }
-
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
