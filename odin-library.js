@@ -96,12 +96,12 @@ function bookDisplay() {
   /* JayBee possible solution
   const books = document.querySelector(".books"); --> His "books" is just an empty div with a class. Similar to our empty tr with a class
 
-  // Loops over the library array and displays to cards
-	myLibrary.forEach(myLibrary => {
+  // Loops over the library array and displays to cards. Maybe try this again using plural inside the parentheses - the parameter
+	myLibrary.forEach(myLibrarys => {
 		const card = document.createElement("div");
 		card.classList.add("card");
 		books.appendChild(card);
-		for (let key in myLibrary) {
+		for (let key in myLibrarys) {
 			console.log(`${key}: ${myLibrary[key]}`);
 			const para = document.createElement("p");
 			para.textContent = (`${key}: ${myLibrary[key]}`);
@@ -110,6 +110,7 @@ function bookDisplay() {
 	}) */
   
   for (const book in myLibrary) {
+    // Potentially ONLY create text nodes and delete them with Remove buttons as needed
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
     const bookPages = document.createElement("td");
@@ -151,18 +152,18 @@ function bookDisplay() {
     table.appendChild(tableRow);
     
     // Remove button functionality
-    removeBtn.addEventListener('click', () => {
-      clearRow();
-    });
+    // removeBtn.addEventListener('click', () => {
+    //   clearRow();
+    // });
 
     // Possible solution on functionality for all remove buttons created using Event Delegation. removeButtons would only be used if we end up doing forEach method
     // const removeButtons = document.querySelectorAll(".remove");
 
-    // table.addEventListener("click", (e) => {
-    //   if (e.target.tagName === 'BUTTON') {
-    //     clearRow();
-    //   }
-    // });
+    table.addEventListener("click", (e) => {
+      if (e.target.tagName === 'BUTTON') {
+        clearRow();
+      }
+    });
   }
   // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
   // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
@@ -171,13 +172,15 @@ function bookDisplay() {
 // Clears table row of all user entered data
 // tableRow.remove() & table.removeChild(tableRow) both work, but remove ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
 function clearRow() {
-  table.removeChild(tableRow);
+  // table.removeChild(tableRow);
+  // const row = e.target.closest(".book-info");
+  // row.remove();
 
-// This would remove all children from an element
-//   const element = document.getElementById("idOfParent");
-//   while (element.firstChild) {
-//     element.removeChild(element.firstChild);
-// }
+// This would remove all children from an element, EXCEPT IT DOESN'T & REMOVES ALL TABLE ROWS JUST LIKE ABOVE :D 
+  while (tableRow.firstChild) {
+    tableRow.removeChild(tableRow.firstChild);
+  }
+  // myLibrary.splice(-1, 1); --> Attempt to solve full array reading issue by removing 1st item in array. Could also try parseInt(value that targets book to remove) instead of -1
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
