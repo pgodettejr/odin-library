@@ -108,8 +108,6 @@ function bookDisplay() {
 			card.appendChild(para);
 		}
 	}) */
-
-  // const tableRows = document.querySelectorAll(".book-info");
   
   for (const book in myLibrary) {
     const bookTitle = document.createElement("td");
@@ -168,14 +166,66 @@ function bookDisplay() {
   }
   // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
   // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
-
-  // A way to delete the first item in the array when the next item is reached?
-  // if (myLibrary === myLibrary[1]){
-  //   myLibrary.shift();
-  // }
 }
 
-// bookDisplay(myLibrary);
+// Clears table row of all user entered data
+// tableRow.remove() & table.removeChild(tableRow) both work, but remove ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
+function clearRow() {
+  table.removeChild(tableRow);
+
+// This would remove all children from an element
+//   const element = document.getElementById("idOfParent");
+//   while (element.firstChild) {
+//     element.removeChild(element.firstChild);
+// }
+}
+
+// "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
+bookBtn.addEventListener('click', () => {
+  dialog.showModal();
+});
+
+// "Confirm" button functionality that checks that all book table was completed by user, then submits it to the table
+confirmBtn.addEventListener('click', (e) => {
+  let complete = document.getElementById("book-form").checkValidity();
+  if(complete) {
+    e.preventDefault();
+    addBookToLibrary();
+    // e.target.dataset.cell += innerText; - This may need to be under addBookToLibrary()
+    document.getElementById("book-form").reset();
+    dialog.close();
+  }
+});
+
+// "Cancel" button functionality that deletes all book table that was entered and closes the form
+cancelBtn.addEventListener('click', () => {
+  document.getElementById("book-form").reset();
+  dialog.close();
+});
+
+// Do I actually need this or is the "Confirm" button functionality above good enough?
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('confirmBtn').addEventListener('click', addBookToLibrary());
+});
+
+// Old & incorrect code
+
+// const book = new Book('Wild at Heart', 'John Eldredge', '234', 'yes')
+// book.table();
+
+// const data = document.querySelector(".card");
+
+// const newTitle = prompt("Please enter the book title:");
+// const newAuthor = prompt("Please enter the author:");
+// const newPages = parseInt(prompt("How many pages is the book?:"));
+// const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
+
+// data.textContent += myLibrary[i].title; // Tried this code and innerText, neither seem to work? Or the issue is addBookToLibrary()
+// data.textContent += myLibrary[i].author;
+// data.textContent += myLibrary[i].pages;
+// data.textContent += myLibrary[i].read;
+
+// tr.appendChild(td);
 
 // Old bookDisplay functions
 
@@ -214,6 +264,15 @@ function bookDisplay(library) {
   }
 } */
 
+  // Incorrect ways to delete the first item in the array when the next item is reached
+  // if (myLibrary === myLibrary[1]){
+  //   myLibrary.shift();
+  // }
+
+  // const tableRows = document.querySelectorAll(".book-info");
+  // for (let i = 0; i < tableRow(s); i++) {
+  //   tableRow(s)[i].remove();
+  // }
 
 /* for (let i = 0; i < table.length; i++) {
     const bookTitle = document.querySelector("td[data-cell=Title]");
@@ -240,63 +299,4 @@ function bookDisplay(library) {
   }
 
 bookDisplay(myLibrary); */
-
-// Clears table row of all user entered data
-// tableRow.remove() works, but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
-function clearRow() {
-  tableRow.reset(); // possibly try table.removeChild(tableRow) or document.querySelector(".book-info").reset();
-
-// This would remove all children from an element
-//   const element = document.getElementById("idOfParent");
-//   while (element.firstChild) {
-//     element.removeChild(element.firstChild);
-// }
-}
-
-// "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
-bookBtn.addEventListener('click', () => {
-  dialog.showModal();
-});
-
-// "Confirm" button functionality that checks that all book table was completed by user, then submits it to the table
-confirmBtn.addEventListener('click', (e) => {
-  let complete = document.getElementById("book-form").checkValidity();
-  if(complete) {
-    e.preventDefault();
-    addBookToLibrary();
-    // e.target.dataset.cell += innerText; - This may need to be under addBookToLibrary()
-    // document.getElementById("book-form").reset(); --> Use this to reset form itself before closing?
-    dialog.close() // dialog.close(all form elements filled in/selected.value); Try to call all Book elements as arguments for this?
-  }
-});
-
-// "Cancel" button functionality that deletes all book table that was entered and closes the form
-cancelBtn.addEventListener('click', () => {
-  // document.getElementById("book-form").reset(); --> Use this to reset form itself before closing?
-  dialog.close();
-});
-
-// Do I actually need this or is the "Confirm" button functionality above good enough?
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('confirmBtn').addEventListener('click', addBookToLibrary());
-});
-
-// Old & incorrect code
-
-// const book = new Book('Wild at Heart', 'John Eldredge', '234', 'yes')
-// book.table();
-
-// const data = document.querySelector(".card");
-
-// const newTitle = prompt("Please enter the book title:");
-// const newAuthor = prompt("Please enter the author:");
-// const newPages = parseInt(prompt("How many pages is the book?:"));
-// const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
-
-// data.textContent += myLibrary[i].title; // Tried this code and innerText, neither seem to work? Or the issue is addBookToLibrary()
-// data.textContent += myLibrary[i].author;
-// data.textContent += myLibrary[i].pages;
-// data.textContent += myLibrary[i].read;
-
-// tr.appendChild(td);
 
