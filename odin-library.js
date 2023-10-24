@@ -17,10 +17,6 @@ function Book(title, author, pages, read) {
   this.author = author
   this.pages = pages
   this.read = read
-
-  // this.table = function() {
-  //   console.log(title, author, pages, read)
-  // }
 }
 
 // Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
@@ -34,7 +30,6 @@ function addBookToLibrary() {
   if (title && author && !isNaN(pages) && (read === 'Yes' || read === 'No')) {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    // tableRow.replaceChildren(); - Not a true solution. Deletes current table row of book info, then re-added in bookDisplay later with other books (See createTextNode notes)
     bookDisplay();
   }
 }
@@ -47,7 +42,7 @@ function addBookToLibrary() {
   }
 } */
 
-// Delete this or comment it out if we have to rework HTML to show just the table header (rows/cells get filled in only after user input)
+// Adds accessibility to all table elements for the disabled via ARIA
 function AddTableARIA() {
   try {
     let allTables = document.querySelectorAll('table');
@@ -88,27 +83,6 @@ AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
 function bookDisplay() {
-  // const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
-  // if (firstEmptyRow === null) {
-  //   console.log('No more available empty rows');
-  // }
-
-  /* JayBee possible solution
-  const books = document.querySelector(".books"); --> His "books" is just an empty div with a class. Similar to our empty tr with a class
-
-  // Loops over the library array and displays to cards. Maybe try this again using plural inside the parentheses - the parameter
-	myLibrary.forEach(myLibrarys => {
-		const card = document.createElement("div");
-		card.classList.add("card");
-		books.appendChild(card);
-		for (let key in myLibrarys) {
-			console.log(`${key}: ${myLibrary[key]}`);
-			const para = document.createElement("p");
-			para.textContent = (`${key}: ${myLibrary[key]}`);
-			card.appendChild(para);
-		}
-	}) */
-  
   for (const book in myLibrary) {
     // Potentially ONLY create text nodes and delete them with Remove buttons as needed
     const bookTitle = document.createElement("td");
@@ -123,9 +97,6 @@ function bookDisplay() {
     bookFinish.setAttribute("data-cell", "Finished");
     bookDelete.setAttribute("data-cell", "Delete");
 
-    // Revisits the first object in the array instead of skipping to the next one when a second/third/etc book is added in the dialog form
-    // Will THEN add the second object in the array (loops through the entire array issue instead of just one/latest/last object)
-    // Array either has to clear once book is added or this needs to be able to skip to the latest object in the array every time
     const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
     const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
     const bookPagesInfo = document.createTextNode(`${myLibrary[book].pages}`);
@@ -165,14 +136,21 @@ function bookDisplay() {
       }
     });
   }
-  // e.target.dataset.cell += innerText; - This may need to be under the "Confirm/Submit" button inside the form
-  // firstEmptyRow.setAttribute('data-cell', 'false'); // May not need this anymore? Still seems useful after code above is ran so function doesn't try to run on 1st row again
+
+  myLibrary.splice(-1, 1);
+
+    // A possible way to brighten the colors of all buttons on hover in JS
+    // buttons.addEventListener("mouseover", () => {
+    //   buttons.classList.add("hover");
+    //   buttons.style.backgroundColor = "";
+    // });
 }
 
 // Clears table row of all user entered data
 // tableRow.remove() & table.removeChild(tableRow) both work, but remove ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
 function clearRow() {
   // table.removeChild(tableRow);
+
   // const row = e.target.closest(".book-info");
   // row.remove();
 
@@ -180,7 +158,6 @@ function clearRow() {
   while (tableRow.firstChild) {
     tableRow.removeChild(tableRow.firstChild);
   }
-  // myLibrary.splice(-1, 1); --> Attempt to solve full array reading issue by removing 1st item in array. Could also try parseInt(value that targets book to remove) instead of -1
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
@@ -272,6 +249,7 @@ function bookDisplay(library) {
   //   myLibrary.shift();
   // }
 
+  // This one might work with the plural parameter in JayBee's solution above
   // const tableRows = document.querySelectorAll(".book-info");
   // for (let i = 0; i < tableRow(s); i++) {
   //   tableRow(s)[i].remove();
