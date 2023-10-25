@@ -56,6 +56,7 @@ tr:nth-of-type(2n) {
   background: hsl(0 0% 0% / .1);
 }
 
+/* Possibly change td from Grid to Flex to get data to show up as a column and not across. Or add Flex to tr? */
 @media (max-width: 650px) {
   th {
     display: none;
@@ -117,6 +118,11 @@ tr:nth-of-type(2n) {
     font-weight: 700;
     text-transform: uppercase;
   }
+
+  & #confirmBtn:hover,
+    #cancelBtn:hover {
+    background: hsl(92 20% 56%);
+  }
 }
 
 label, input {
@@ -146,6 +152,10 @@ button {
   font-weight: 700;
   /* display: inline-flex;
   align-items: center; */
+}
+
+.new-book:hover {
+  background: hsl(92 20% 56%);
 }
 
 .remove {
