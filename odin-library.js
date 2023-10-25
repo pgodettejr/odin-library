@@ -104,17 +104,20 @@ function bookDisplay() {
 
     const removeBtn = document.createElement("button");
     const removeText = document.createTextNode("REMOVE");
-    removeBtn.classList.add(".remove"); // Either need a CSS psuedo-selector or dynamically add CSS styling here in order to shrink Remove button to proper size on current CSS
+    removeBtn.classList.add(".remove");
 
     removeBtn.style.margin = '0';
     removeBtn.style.padding = '4px 8px';
     removeBtn.style.backgroundColor = '#596D48';
-
-    removeText.style.fontSize = '16px';
-    removeText.style.fontWeight = '700';
+    removeBtn.style.fontSize = '12px';
+    removeBtn.style.fontWeight = '700';
 
     removeBtn.addEventListener("mouseover", (e) => {
-      e.style.backgroundColor = 'hsl(92 20% 56%)';
+      e.target.style.backgroundColor = 'hsl(92 20% 56%)';
+    });
+
+    removeBtn.addEventListener("mouseleave", (e) => {
+      e.target.style.backgroundColor = '#596D48';
     });
 
     removeBtn.appendChild(removeText);
@@ -150,12 +153,6 @@ function bookDisplay() {
   }
 
   myLibrary.splice(-1, 1);
-
-    // A possible way to brighten the colors of all buttons on hover in JS
-    // buttons.addEventListener("mouseover", () => {
-    //   buttons.classList.add("hover");
-    //   buttons.style.backgroundColor = "";
-    // });
 }
 
 // Clears table row of all user entered data
@@ -293,3 +290,8 @@ function bookDisplay(library) {
 
 bookDisplay(myLibrary); */
 
+// A possible way to brighten the colors of all buttons on hover in JS
+    // buttons.addEventListener("mouseover", () => {
+    //   buttons.classList.add("hover");
+    //   buttons.style.backgroundColor = "";
+    // });
