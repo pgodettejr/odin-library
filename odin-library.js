@@ -105,6 +105,18 @@ function bookDisplay() {
     const removeBtn = document.createElement("button");
     const removeText = document.createTextNode("REMOVE");
     removeBtn.classList.add(".remove"); // Either need a CSS psuedo-selector or dynamically add CSS styling here in order to shrink Remove button to proper size on current CSS
+
+    removeBtn.style.margin = '0';
+    removeBtn.style.padding = '4px 8px';
+    removeBtn.style.backgroundColor = '#596D48';
+
+    removeText.style.fontSize = '16px';
+    removeText.style.fontWeight = '700';
+
+    removeBtn.addEventListener("mouseover", (e) => {
+      e.style.backgroundColor = 'hsl(92 20% 56%)';
+    });
+
     removeBtn.appendChild(removeText);
 
     bookTitle.appendChild(bookTitleInfo);
