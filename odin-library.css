@@ -52,6 +52,12 @@ th {
   background: hsl(0 0% 0% / .5);
 }
 
+/* When td generates to the right, 1st one gets space cut in half so the 2nd one fits within total space. Every td after that breaks out of that space to the right */
+.user-input {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Attempt to get added table row elements to appear in a column & not as a row. Doesn't work (table data info INSIDE the row shows as a column instead)
 See HTML for next steps on how to get things to appear as a column
 .book-info {
@@ -165,16 +171,3 @@ button {
 .new-book:hover {
   background: hsl(92 20% 56%);
 }
-
-/* Why didn't this styling activate when I had it in the separate CSS before, but DOES activate when I style it in JS
-.remove {
-  margin: 0;
-  padding: 4px 8px;
-  background-color: #596D48;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.remove:hover {
-  background: hsl(92 20% 56%);
-} */

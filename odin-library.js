@@ -42,7 +42,7 @@ function addBookToLibrary() {
   }
 } */
 
-// Adds accessibility to all table elements for the disabled via ARIA
+// Adds accessibility to all table elements for the disabled via ARIA. This existing is possibly throwing off row positioning (separate tbody with all elements created as 1st child)
 function AddTableARIA() {
   try {
     let allTables = document.querySelectorAll('table');
@@ -129,6 +129,8 @@ function bookDisplay() {
     bookDelete.appendChild(removeBtn);
 
     // When a second book is added, the table row elements appear to the right of the first row instead of under the first row. CSS positioning?
+    // This is because all row elements appear under the same first table row instead of being created under the next table row existing in the HTML
+    // Either dynamically generate tableRow in this function and comment out from HTML or figure out a way to get subsequent dynamic element to show under next existing tr
     tableRow.appendChild(bookTitle);
     tableRow.appendChild(bookAuthor);
     tableRow.appendChild(bookPages);
