@@ -106,6 +106,10 @@ See HTML for next steps on how to get things to appear as a column
   border-radius: 8px;
   box-shadow: 0 5px 3px #c7c9cc;
 
+  /* Potentially centers the dialog form */ 
+  /* width: 60%;
+  margin: 0 auto; */
+
   /* Cancel button no longer works once I implement this block of CSS to center the dialog */
   /* display: flex;
   flex-direction: column;

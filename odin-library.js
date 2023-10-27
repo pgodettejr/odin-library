@@ -83,6 +83,27 @@ AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
 function bookDisplay() {
+  // "if" conditional statement here as a solution to get subsequent dynamic td elements to show under next existing tr that has no children
+
+  // Example (this doesn't work btw):
+
+  /* function bookDisplay(datarow) {
+  const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
+  if (firstEmptyRow === null) {
+    console.log('No more available empty rows');
+    return;
+  }
+
+  let i = 0;
+  for (cellvalue of datarow) {
+    firstEmptyRow.children[i].textContent = cellvalue;
+    i++;
+  }
+
+  firstEmptyRow.setAttribute('data-cell', 'false');
+  dialog.reset();
+} */
+
   for (const book in myLibrary) {
     // Potentially ONLY create text nodes and delete them with Remove buttons as needed
     const bookTitle = document.createElement("td");
@@ -91,6 +112,7 @@ function bookDisplay() {
     const bookFinish = document.createElement("td");
     const bookDelete = document.createElement("td");
 
+    // Should I set another "contenteditable", "true" attribute on bookFinish to allow users to change from Yes to No?
     bookTitle.setAttribute("data-cell", "Title");
     bookAuthor.setAttribute("data-cell", "Author");
     bookPages.setAttribute("data-cell", "Pages");
@@ -130,6 +152,7 @@ function bookDisplay() {
 
     // When a second book is added, the table row elements appear to the right of the first row instead of under the first row. CSS positioning?
     // This is because all row elements appear under the same first table row instead of being created under the next table row existing in the HTML
+    // This is also why any Remove button deletes all the rows instead of just the row it's specifically on
     // Either dynamically generate tableRow in this function and comment out from HTML or figure out a way to get subsequent dynamic element to show under next existing tr
     tableRow.appendChild(bookTitle);
     tableRow.appendChild(bookAuthor);
@@ -161,11 +184,12 @@ function bookDisplay() {
 // tableRow.remove() & table.removeChild(tableRow) both work, but remove ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
 function clearRow() {
   // table.removeChild(tableRow);
+  // myLibrary.splice(tableRow, 1);
 
   // const row = e.target.closest(".book-info");
   // row.remove();
 
-// This would remove all children from an element, EXCEPT IT DOESN'T & REMOVES ALL TABLE ROWS JUST LIKE ABOVE :D 
+// This would remove all children from an element, EXCEPT IT DOESN'T & REMOVES ALL TABLE ROWS JUST LIKE ABOVE :D (Keep this for now)
   while (tableRow.firstChild) {
     tableRow.removeChild(tableRow.firstChild);
   }
