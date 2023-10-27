@@ -52,25 +52,11 @@ th {
   background: hsl(0 0% 0% / .5);
 }
 
-/* When td generates to the right, 1st one gets space cut in half so the 2nd one fits within total space. Every td after that breaks out of that space to the right */
-.user-input {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Attempt to get added table row elements to appear in a column & not as a row. Doesn't work (table data info INSIDE the row shows as a column instead)
-See HTML for next steps on how to get things to appear as a column
-.book-info {
-  display: flex;
-  flex-direction: column;
-} */
-
 /* This might have to be styled in bookDisplay function in JS file */
 .book-info:nth-of-type(2n) {
   background: hsl(0 0% 0% / .1);
 }
 
-/* Possibly change td from Grid to Flex to get data to show up as a column and not across */
 @media (max-width: 650px) {
   th {
     display: none;
