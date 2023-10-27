@@ -3,7 +3,6 @@ const main = document.querySelector(".container");
 const bookBtn = document.querySelector(".new-book");
 const dialog = document.querySelector("#form-dialog");
 const table = document.querySelector('#book-table');
-const tableRow = document.querySelector(".book-info");
 const confirmBtn = document.querySelector("#confirmBtn");
 const cancelBtn = document.querySelector("#cancelBtn");
 const outputBox = document.querySelector("output");
@@ -83,7 +82,7 @@ AddTableARIA();
 
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
 function bookDisplay() {
-  // "if" conditional statement here as a solution to get subsequent dynamic td elements to show under next existing tr that has no children
+  // "if" conditional statement here as a solution to get subsequent dynamic td elements to show under next existing tr that has no children ("for in" loop goes under it)
 
   // Example (this doesn't work btw):
 
@@ -106,6 +105,9 @@ function bookDisplay() {
 
   for (const book in myLibrary) {
     // Potentially ONLY create text nodes and delete them with Remove buttons as needed
+    const tableRow = document.createElement("tr");
+    tableRow.classList.add(".book-info");
+
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
     const bookPages = document.createElement("td");
@@ -186,13 +188,11 @@ function clearRow() {
   // table.removeChild(tableRow);
   // myLibrary.splice(tableRow, 1);
 
-  // const row = e.target.closest(".book-info");
-  // row.remove();
-
-// This would remove all children from an element, EXCEPT IT DOESN'T & REMOVES ALL TABLE ROWS JUST LIKE ABOVE :D (Keep this for now)
-  while (tableRow.firstChild) {
-    tableRow.removeChild(tableRow.firstChild);
-  }
+// This would potentially remove all children from an element, but it needs to target a tr with a specific class, not just the first child. Remove buttons have no response
+  // const bookInfo = document.querySelector(".book-info");
+  // while (bookInfo.firstChild) {
+  //   bookInfo.removeChild(bookInfo.firstChild);
+  // }
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
@@ -321,3 +321,7 @@ bookDisplay(myLibrary); */
     //   buttons.classList.add("hover");
     //   buttons.style.backgroundColor = "";
     // });
+
+// Tried to target closest tr with a class of book-info for deletion
+    // const row = e.target.closest(".book-info");
+    // row.remove();
