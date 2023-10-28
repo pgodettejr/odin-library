@@ -147,6 +147,41 @@ function bookDisplay() {
         table.removeChild(tableRow); // works but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
       }
     });
+
+    // JayBee remove button solution: links data attribute of remove button to array and "card", then starts event listener & removes array item & card from parent div via data link
+    // let index = 0;
+
+    // removeBtn.dataset.linkedArray = index;
+    // removeBtn.addEventListener('click', clearRow);
+
+    // JayBee's approach to "Read" status toggle button on table rows
+
+    // Create read status button & add class attribute to each table row
+    // const readStatusButton = document.createElement('button');
+    // readStatusButton.classList.add("read-status-button");
+    // readStatusButton.textContent = "Toggle Read Status"
+
+    // Link the data attribute of the toggle read button to the array and table row
+    // readStatusButton.dataset.linkedArray = index;
+    // tableRow.appendChild(readStatusButton);
+
+    // Create event listener/toggle logic for array object prototype for read status change
+    // readStatusButton.addEventListener("click", toggleReadStatus);
+
+    // function toggleReadStatus() {
+    //   let retrieveBookToToggle = readStatusButton.dataset.linkedArray;
+    //   Book.prototype = Object.create(Book.prototype);
+    //   const toggleBook = new Book();
+
+      // Run check to see what read value is present to toggle from
+      // if ((myLibrary[parseInt(retrieveBookToToggle)].read) == "Yes") {
+      //   toggleBook.read = "No";
+      //   myLibrary[parseInt(retrieveBookToToggle)].read = toggleBook.read;
+      // } else if ((myLibrary[parseInt(retrieveBookToToggle)].read) == "No") {
+      //   toggleBook.read = "Yes";
+      //   myLibrary[parseInt(retrieveBookToToggle)].read = toggleBook.read;
+      // }
+      // bookDisplay();
   }
 
   myLibrary.splice(-1, 1);
@@ -162,6 +197,12 @@ function clearRow() {
   // while (bookInfo.firstChild) {
   //   bookInfo.removeChild(bookInfo.firstChild);
   // }
+
+// JayBee function
+  // let = retrieveBookToRemove = removeBtn.dataset.linkedArray; (see above in bookDisplay for what this references)
+  // myLibrary.splice(parseInt(retrieveBookToRemove), 1);
+  // tableRow.remove();
+  // bookDisplay();
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
