@@ -79,6 +79,9 @@ function bookDisplay() {
     const tableRow = document.createElement("tr");
     tableRow.classList.add(".book-info");
 
+    // Possibly styles every even table row correctly?
+    // tableRow(':nth-of-type(2n)').style.backgroundColor = 'hsl(0 0% 0% / .1)';
+
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
     const bookPages = document.createElement("td");
