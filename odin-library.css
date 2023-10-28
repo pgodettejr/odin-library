@@ -52,8 +52,8 @@ th {
   background: hsl(0 0% 0% / .5);
 }
 
-/* This might have to be styled in bookDisplay function in JS file */
-.book-info:nth-of-type(2n) {
+/* This might have to be styled in bookDisplay function in JS file. Neither tr nor .book-info nor tr.book-info work */
+tr.book-info:nth-of-type(2n) {
   background: hsl(0 0% 0% / .1);
 }
 
