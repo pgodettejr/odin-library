@@ -18,7 +18,7 @@ function Book(title, author, pages, read) {
   this.read = read
 }
 
-// Stores new Book objects into myLibrary array via user input. May need a forEach button method here & target it in the DOM above
+// Stores new Book objects into myLibrary array via user input
 function addBookToLibrary() {
   // Making these global doesn't work. User input never posts to table.
   let title = document.querySelector("#book-title").value;
@@ -32,14 +32,6 @@ function addBookToLibrary() {
     bookDisplay();
   }
 }
-
-// May need this under addBookToLibrary() instead
-/* while(true) {
-  let enterBook = prompt("Please add a book title").toLowerCase();
-  if(enterBook === Number || enterBook === null) {
-    break;
-  }
-} */
 
 // Adds accessibility to all table elements for the disabled via ARIA. This existing is possibly throwing off row positioning (separate tbody with all elements created as 1st child)
 function AddTableARIA() {
@@ -83,7 +75,7 @@ AddTableARIA();
 // Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
 function bookDisplay() {
   for (const book in myLibrary) {
-    // Potentially ONLY create text nodes and delete them with Remove buttons as needed
+    // Different variation of this loop could ONLY create text nodes and delete them with Remove buttons as needed (assuming everything else is already in HTML)
     const tableRow = document.createElement("tr");
     tableRow.classList.add(".book-info");
 
@@ -139,7 +131,7 @@ function bookDisplay() {
 
     table.appendChild(tableRow);
     
-    // Remove button functionality
+    // Remove button functionality. May need a forEach button method here & target it in the DOM above
     // removeBtn.addEventListener('click', () => {
     //   clearRow();
     // });
@@ -149,7 +141,7 @@ function bookDisplay() {
 
     table.addEventListener("click", (e) => {
       if (e.target.tagName === 'BUTTON') {
-        table.removeChild(tableRow);
+        table.removeChild(tableRow); // works but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
       }
     });
   }
@@ -157,8 +149,7 @@ function bookDisplay() {
   myLibrary.splice(-1, 1);
 }
 
-// Clears table row of all user entered data
-// tableRow.remove() & table.removeChild(tableRow) both work, but remove ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
+// Clears table row of all user entered data. tableRow.remove() & table.removeChild(tableRow) both work, but remove ALL td elements with ".book-info" class (see above)
 function clearRow() {
   // table.removeChild(bookInfo);
   // myLibrary.splice(tableRow, 1);
@@ -216,6 +207,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // data.textContent += myLibrary[i].read;
 
 // tr.appendChild(td);
+
+// May need this under addBookToLibrary() instead
+/* while(true) {
+  let enterBook = prompt("Please add a book title").toLowerCase();
+  if(enterBook === Number || enterBook === null) {
+    break;
+  }
+} */
 
 // Old bookDisplay functions
 
