@@ -117,6 +117,22 @@ function bookDisplay() {
       e.target.style.backgroundColor = '#596D48';
     });
 
+    // Attempts to add a unique "id" to each table row that is generated in order to be targeted for removal via removeBtn elsewhere in this function (getElementById)
+    // for (let i = 0; i < tableRow.length; i++) {
+    //   tableRow[i].setAttribute("id", myLibrary[i]);
+    // }
+
+    // const array = ['navbar', 'sidebar', 'section1', 'section2', 'footer'];
+    // const changeDivId = (arr) => {
+    // const divsArray = document.querySelectorAll('div');
+    // arr.forEach((element, index) => {
+    //   divsArray[index].id = element;
+    //   });
+    // };
+    // changeDivId(array);
+
+    // const tableRows = document.querySelectorAll(".book-info"); <-- use this on a forEach method above instead of the original for loop regarding "unique id"? Only good if array
+
     removeBtn.appendChild(removeText);
     // console.log("show me my current array objects inside of this loop...", myLibrary);
 
@@ -134,7 +150,7 @@ function bookDisplay() {
 
     table.appendChild(tableRow);
     
-    // Remove button functionality. May need a forEach button method here & target it in the DOM above
+    // Remove button functionality. May need a forEach button method here & target it in the DOM above (forEach only works on arrays)
     // removeBtn.addEventListener('click', () => {
     //   clearRow();
     // });
