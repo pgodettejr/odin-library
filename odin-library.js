@@ -5,7 +5,6 @@ const dialog = document.querySelector("#form-dialog");
 const table = document.querySelector('#book-table');
 const confirmBtn = document.querySelector("#confirmBtn");
 const cancelBtn = document.querySelector("#cancelBtn");
-const outputBox = document.querySelector("output");
 
 // List of books in the library
 const myLibrary = [];
@@ -171,9 +170,9 @@ function bookDisplay() {
     // function toggleReadStatus() {
     //   let retrieveBookToToggle = readStatusButton.dataset.linkedArray;
     //   Book.prototype = Object.create(Book.prototype);
-    //   const toggleBook = new Book();
+    //   const toggleBook = new Book(); // this gives toggleBook all the access to all the book info in the constructor above
 
-      // Run check to see what read value is present to toggle from
+      // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
       // if ((myLibrary[parseInt(retrieveBookToToggle)].read) == "Yes") {
       //   toggleBook.read = "No";
       //   myLibrary[parseInt(retrieveBookToToggle)].read = toggleBook.read;
@@ -199,7 +198,7 @@ function clearRow() {
   // }
 
 // JayBee function
-  // let = retrieveBookToRemove = removeBtn.dataset.linkedArray; (see above in bookDisplay for what this references)
+  // let retrieveBookToRemove = removeBtn.dataset.linkedArray; (see above in bookDisplay for what this references)
   // myLibrary.splice(parseInt(retrieveBookToRemove), 1);
   // tableRow.remove();
   // bookDisplay();
