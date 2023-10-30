@@ -78,8 +78,16 @@ function bookDisplay() {
     const tableRow = document.createElement("tr");
     tableRow.classList.add(".book-info");
 
-    // Possibly styles every even table row correctly?
-    // tableRow(':nth-of-type(2n)').style.backgroundColor = 'hsl(0 0% 0% / .1)';
+    // This one might need to be in a function with DOM targeting for every .book-info tr that would also have to contain some other data-attribute to style even numbered rows
+    // const evenRows = tableRow[1];
+    // evenRows.style.backgroundColor = 'hsl(0 0% 0% / .1)';
+
+    // This doesn't seem to change any row background color styling on its own. Leaving it for now in case it's useful elsewhere
+    for (let i = 0; i < tableRow.length; i++) {
+      if (i % 2 === 0) {
+        tableRow.style.backgroundColor = 'hsl(0 0% 0% / .1)';
+      }
+    }
 
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
