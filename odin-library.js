@@ -118,6 +118,7 @@ function bookDisplay() {
     });
 
     removeBtn.appendChild(removeText);
+    // console.log("show me my current array objects inside of this loop...", myLibrary);
 
     bookTitle.appendChild(bookTitleInfo);
     bookAuthor.appendChild(bookAuthorInfo);
@@ -151,6 +152,9 @@ function bookDisplay() {
     // let index = 0;
 
     // removeBtn.dataset.linkedArray = index;
+    // console.log("show me dataset link back to array...", removeBtn.dataset.linkedArray);
+    // Everything above this line goes above appendChild code
+
     // removeBtn.addEventListener('click', clearRow);
 
     // JayBee's approach to "Read" status toggle button on table rows
@@ -162,6 +166,7 @@ function bookDisplay() {
 
     // Link the data attribute of the toggle read button to the array and table row
     // readStatusButton.dataset.linkedArray = index;
+    // console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readStatusButton.dataset.linkedArray);
     // tableRow.appendChild(readStatusButton);
 
     // Create event listener/toggle logic for array object prototype for read status change
@@ -171,6 +176,7 @@ function bookDisplay() {
     //   let retrieveBookToToggle = readStatusButton.dataset.linkedArray;
     //   Book.prototype = Object.create(Book.prototype);
     //   const toggleBook = new Book(); // this gives toggleBook all the access to all the book info in the constructor above
+    //   console.log("What is the toggle initial value?...", myLibrary[parseInt(retrieveBookToToggle)].read);
 
       // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
       // if ((myLibrary[parseInt(retrieveBookToToggle)].read) == "Yes") {
@@ -199,6 +205,7 @@ function clearRow() {
 
 // JayBee function
   // let retrieveBookToRemove = removeBtn.dataset.linkedArray; (see above in bookDisplay for what this references)
+  // console.log("Attempting to remove array item via data attribute...", parseInt(retrieveBookToRemove));
   // myLibrary.splice(parseInt(retrieveBookToRemove), 1);
   // tableRow.remove();
   // bookDisplay();
