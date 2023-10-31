@@ -1,4 +1,4 @@
-// Will need more DOM elements here once HTML is modified
+// Global DOM elements
 const main = document.querySelector(".container");
 const bookBtn = document.querySelector(".new-book");
 const dialog = document.querySelector("#form-dialog");
@@ -71,12 +71,13 @@ function AddTableARIA() {
 
 AddTableARIA();
 
-// Checks if table row is empty, then loops through myLibrary array & displays each Book on the table row
+// Loops through myLibrary array & displays each Book as a table row in the table
 function bookDisplay() {
   for (const book in myLibrary) {
-    // Different variation of this loop could ONLY create text nodes and delete them with Remove buttons as needed (assuming everything else is already in HTML)
     const tableRow = document.createElement("tr");
     tableRow.classList.add(".book-info");
+
+    // const tableRows = document.querySelectorAll(".book-info"); <-- use this on a possible forEach method
 
     // This one might need to be in a function with DOM targeting for every .book-info tr that would also have to contain some other data-attribute to style even numbered rows
     // const evenRows = tableRow[1];
@@ -125,24 +126,7 @@ function bookDisplay() {
       e.target.style.backgroundColor = '#596D48';
     });
 
-    // Attempts to add a unique "id" to each table row that is generated in order to be targeted for removal via removeBtn elsewhere in this function (getElementById)
-    // for (let i = 0; i < tableRow.length; i++) {
-    //   tableRow[i].setAttribute("id", myLibrary[i]);
-    // }
-
-    // const array = ['navbar', 'sidebar', 'section1', 'section2', 'footer'];
-    // const changeDivId = (arr) => {
-    // const divsArray = document.querySelectorAll('div');
-    // arr.forEach((element, index) => {
-    //   divsArray[index].id = element;
-    //   });
-    // };
-    // changeDivId(array);
-
-    // const tableRows = document.querySelectorAll(".book-info"); <-- use this on a forEach method above instead of the original for loop regarding "unique id"? Only good if array
-
     removeBtn.appendChild(removeText);
-    // console.log("show me my current array objects inside of this loop...", myLibrary);
 
     bookTitle.appendChild(bookTitleInfo);
     bookAuthor.appendChild(bookAuthorInfo);
@@ -158,28 +142,11 @@ function bookDisplay() {
 
     table.appendChild(tableRow);
     
-    // Remove button functionality. May need a forEach button method here & target it in the DOM above (forEach only works on arrays)
-    // removeBtn.addEventListener('click', () => {
-    //   clearRow();
-    // });
-
-    // Possible solution on functionality for all remove buttons created using Event Delegation. removeButtons would only be used if we end up doing forEach method
-    // const removeButtons = document.querySelectorAll(".remove");
-
-    table.addEventListener("click", (e) => {
-      if (e.target.tagName === 'BUTTON') {
-        table.removeChild(tableRow); // works but removes ALL td elements with ".book-info" class instead of just the td element that specific Remove button is inside of
-      }
+    // Remove button functionality
+    removeBtn.addEventListener('click', () => {
+      tableRow.remove();
+      myLibrary.splice(-1, 1);
     });
-
-    // JayBee remove button solution: links data attribute of remove button to array and "card", then starts event listener & removes array item & card from parent div via data link
-    // let index = 0;
-
-    // removeBtn.dataset.linkedArray = index;
-    // console.log("show me dataset link back to array...", removeBtn.dataset.linkedArray);
-    // Everything above this line goes above appendChild code
-
-    // removeBtn.addEventListener('click', clearRow);
 
     // JayBee's approach to "Read" status toggle button on table rows
 
@@ -214,25 +181,6 @@ function bookDisplay() {
   }
 
   myLibrary.splice(-1, 1);
-}
-
-// Clears table row of all user entered data. tableRow.remove() & table.removeChild(tableRow) both work, but remove ALL td elements with ".book-info" class (see above)
-function clearRow() {
-  // table.removeChild(bookInfo);
-  // myLibrary.splice(tableRow, 1);
-
-// This would potentially remove all children from an element, but it needs to target a tr with a specific class, not just the first child. Remove buttons have no response
-  // const bookInfo = document.querySelector(".book-info");
-  // while (bookInfo.firstChild) {
-  //   bookInfo.removeChild(bookInfo.firstChild);
-  // }
-
-// JayBee function
-  // let retrieveBookToRemove = removeBtn.dataset.linkedArray; (see above in bookDisplay for what this references)
-  // console.log("Attempting to remove array item via data attribute...", parseInt(retrieveBookToRemove));
-  // myLibrary.splice(parseInt(retrieveBookToRemove), 1);
-  // tableRow.remove();
-  // bookDisplay();
 }
 
 // "New Book" button functionality that brings up a form to enter the title, author, # of pages & Finished/Read status for the new book
