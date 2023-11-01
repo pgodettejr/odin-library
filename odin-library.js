@@ -99,7 +99,7 @@ function bookDisplay() {
     const bookDelete = document.createElement("td");
     const bookToggle = document.createElement("td");
 
-    // Should I set another "contenteditable", "true" attribute on bookFinish to allow users to change from Yes to No?
+    // Should I set another "contenteditable", "true" attribute on bookFinish to allow users to change from Yes to No? (all bookToggle code could be deleted if we do this)
     bookTitle.setAttribute("data-cell", "Title");
     bookAuthor.setAttribute("data-cell", "Author");
     bookPages.setAttribute("data-cell", "Pages");
@@ -186,7 +186,7 @@ function bookDisplay() {
       let getBook = readBtn.dataset.linkedArray;
       Book.prototype = Object.create(Book.prototype);
       const toggleBook = new Book(); // this gives toggleBook all the access to all the book info in the constructor above
-      // console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read);
+      console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read);
 
       // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
       if ((myLibrary[parseInt(getBook)].read) == "Yes") {
