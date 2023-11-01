@@ -73,6 +73,8 @@ AddTableARIA();
 
 // Loops through myLibrary array & displays each Book as a table row in the table
 function bookDisplay() {
+  let index = 0;
+
   for (const book in myLibrary) {
     const tableRow = document.createElement("tr");
     tableRow.classList.add(".book-info");
@@ -95,6 +97,7 @@ function bookDisplay() {
     const bookPages = document.createElement("td");
     const bookFinish = document.createElement("td");
     const bookDelete = document.createElement("td");
+    const bookToggle = document.createElement("td");
 
     // Should I set another "contenteditable", "true" attribute on bookFinish to allow users to change from Yes to No?
     bookTitle.setAttribute("data-cell", "Title");
@@ -102,6 +105,7 @@ function bookDisplay() {
     bookPages.setAttribute("data-cell", "Pages");
     bookFinish.setAttribute("data-cell", "Finished");
     bookDelete.setAttribute("data-cell", "Delete");
+    bookToggle.setAttribute("data-cell", "Toggle");
 
     const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
     const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
@@ -126,19 +130,40 @@ function bookDisplay() {
       e.target.style.backgroundColor = '#596D48';
     });
 
+    const readBtn = document.createElement('button');
+    const finishText = document.createTextNode("FINISHED?");
+    readBtn.classList.add("read-status");
+
+    readBtn.style.margin = '0';
+    readBtn.style.padding = '4px 8px';
+    readBtn.style.backgroundColor = '#596D48';
+    readBtn.style.fontSize = '12px';
+    readBtn.style.fontWeight = '700';
+
+    readBtn.addEventListener("mouseover", (e) => {
+      e.target.style.backgroundColor = 'hsl(92 20% 56%)';
+    });
+
+    readBtn.addEventListener("mouseleave", (e) => {
+      e.target.style.backgroundColor = '#596D48';
+    });
+
     removeBtn.appendChild(removeText);
+    readBtn.appendChild(finishText);
 
     bookTitle.appendChild(bookTitleInfo);
     bookAuthor.appendChild(bookAuthorInfo);
     bookPages.appendChild(bookPagesInfo);
     bookFinish.appendChild(bookFinishInfo);
     bookDelete.appendChild(removeBtn);
+    bookToggle.appendChild(readBtn);
 
     tableRow.appendChild(bookTitle);
     tableRow.appendChild(bookAuthor);
     tableRow.appendChild(bookPages);
     tableRow.appendChild(bookFinish);
     tableRow.appendChild(bookDelete);
+    tableRow.appendChild(bookToggle);
 
     table.appendChild(tableRow);
     
@@ -149,35 +174,31 @@ function bookDisplay() {
     });
 
     // JayBee's approach to "Read" status toggle button on table rows
-
-    // Create read status button & add class attribute to each table row
-    // const readStatusButton = document.createElement('button');
-    // readStatusButton.classList.add("read-status-button");
-    // readStatusButton.textContent = "Toggle Read Status"
-
+    
     // Link the data attribute of the toggle read button to the array and table row
-    // readStatusButton.dataset.linkedArray = index;
-    // console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readStatusButton.dataset.linkedArray);
-    // tableRow.appendChild(readStatusButton);
+    readBtn.dataset.linkedArray = index;
+    // console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readBtn.dataset.linkedArray);
 
     // Create event listener/toggle logic for array object prototype for read status change
-    // readStatusButton.addEventListener("click", toggleReadStatus);
+    readBtn.addEventListener("click", toggleFinish);
 
-    // function toggleReadStatus() {
-    //   let retrieveBookToToggle = readStatusButton.dataset.linkedArray;
-    //   Book.prototype = Object.create(Book.prototype);
-    //   const toggleBook = new Book(); // this gives toggleBook all the access to all the book info in the constructor above
-    //   console.log("What is the toggle initial value?...", myLibrary[parseInt(retrieveBookToToggle)].read);
+    function toggleFinish() {
+      let getBook = readBtn.dataset.linkedArray;
+      Book.prototype = Object.create(Book.prototype);
+      const toggleBook = new Book(); // this gives toggleBook all the access to all the book info in the constructor above
+      // console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read);
 
       // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
-      // if ((myLibrary[parseInt(retrieveBookToToggle)].read) == "Yes") {
-      //   toggleBook.read = "No";
-      //   myLibrary[parseInt(retrieveBookToToggle)].read = toggleBook.read;
-      // } else if ((myLibrary[parseInt(retrieveBookToToggle)].read) == "No") {
-      //   toggleBook.read = "Yes";
-      //   myLibrary[parseInt(retrieveBookToToggle)].read = toggleBook.read;
-      // }
-      // bookDisplay();
+      if ((myLibrary[parseInt(getBook)].read) == "Yes") {
+        toggleBook.read = "No";
+        myLibrary[parseInt(getBook)].read = toggleBook.read;
+      } else if ((myLibrary[parseInt(getBook)].read) == "No") {
+        toggleBook.read = "Yes";
+        myLibrary[parseInt(getBook)].read = toggleBook.read;
+      }
+
+      bookDisplay();
+    }
   }
 
   myLibrary.splice(-1, 1);
