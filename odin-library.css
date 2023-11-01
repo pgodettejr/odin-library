@@ -128,7 +128,7 @@ tr.book-info:nth-of-type(2n) {
   }
 }
 
-/* Attempt to create a backdrop when the dialog form is brought up to further stress the inert status of the rest of the webpage */
+/* Attempt to create a backdrop when the dialog form is brought up to further highlight the inert status of the rest of the webpage */
 /* #book-form::backdrop {
   background: #f6f9ff;
   opacity: 0.75;
