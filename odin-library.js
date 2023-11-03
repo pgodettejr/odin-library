@@ -177,9 +177,9 @@ function bookDisplay() {
     
     // Link the data attribute of the toggle read button to the array and table row
     readBtn.dataset.linkedArray = index;
-    // console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readBtn.dataset.linkedArray);
+    console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readBtn.dataset.linkedArray);
 
-    // Create event listener/toggle logic for array object prototype for read status change
+    // Create event listener/toggle logic for array object prototype for read status change. Try to make this an anonymous arrow function instead of delcared toggleFinish (see removeBtn above as an example). Might not work based on invocation of "this" in the prototype of Book
     readBtn.addEventListener("click", toggleFinish);
 
     function toggleFinish() {
