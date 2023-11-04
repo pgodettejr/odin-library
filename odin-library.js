@@ -169,7 +169,7 @@ function bookDisplay() {
       myLibrary.splice(-1, 1);
     });
 
-    // JayBee's approach to "Read" status toggle button on table rows
+    // JayBee's approach to "Read" status toggle button on table rows (my linkedArray is undefined but his is defined. How?)
     
     // Link the data attribute of the toggle read button to the array and table row
     readBtn.dataset.linkedArray = index;
@@ -180,8 +180,8 @@ function bookDisplay() {
 
     function toggleFinish() {
       let getBook = readBtn.dataset.linkedArray;
-      Book.prototype = Object.create(Book.prototype);
-      const toggleBook = new Book(); // this gives toggleBook all the access to all the book info in the constructor above
+      Book.prototype = Object.create(Book.prototype); // He said this might not be necessary due to JS automatically giving Book constructor a prototype
+      const toggleBook = new Book(); // this gives toggleBook access to all the book info in the constructor above
       console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read); // Uncaught TypeError: Cannot read properties of undefined (reading 'read')
 
       // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
