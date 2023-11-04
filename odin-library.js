@@ -81,13 +81,9 @@ function bookDisplay() {
 
     // const tableRows = document.querySelectorAll(".book-info"); <-- use this on a possible forEach method
 
-    // This one might need to be in a function with DOM targeting for every .book-info tr that would also have to contain some other data-attribute to style even numbered rows
-    // const evenRows = tableRow[1];
-    // evenRows.style.backgroundColor = 'hsl(0 0% 0% / .1)';
-
-    // This doesn't seem to change any row background color styling on its own. Leaving it for now in case it's useful elsewhere
+    // This doesn't seem to change any row background color styling on its own. Leaving it for now in case it's useful elsewhere. Math.floor & bitwise methods don't work either
     for (let i = 0; i < tableRow.length; i++) {
-      if (i % 2 === 0) {
+      if (i % 2 !== 0) {
         tableRow.style.backgroundColor = 'hsl(0 0% 0% / .1)';
       }
     }
@@ -186,7 +182,7 @@ function bookDisplay() {
       let getBook = readBtn.dataset.linkedArray;
       Book.prototype = Object.create(Book.prototype);
       const toggleBook = new Book(); // this gives toggleBook all the access to all the book info in the constructor above
-      console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read);
+      console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read); // Uncaught TypeError: Cannot read properties of undefined (reading 'read')
 
       // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
       if ((myLibrary[parseInt(getBook)].read) == "Yes") {
