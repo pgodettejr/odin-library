@@ -77,16 +77,9 @@ function bookDisplay() {
 
   for (const book in myLibrary) {
     const tableRow = document.createElement("tr");
-    tableRow.classList.add(".book-info");
+    tableRow.classList.add("book-info");
 
     // const tableRows = document.querySelectorAll(".book-info"); <-- use this on a possible forEach method
-
-    // This doesn't seem to change any row background color styling on its own. Leaving it for now in case it's useful elsewhere. Math.floor & bitwise methods don't work either
-    for (let i = 0; i < tableRow.length; i++) {
-      if (i % 2 !== 0) {
-        tableRow.style.backgroundColor = 'hsl(0 0% 0% / .1)';
-      }
-    }
 
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
@@ -341,3 +334,9 @@ bookDisplay(myLibrary); */
 //   e.target.style.backgroundColor = '#596D48';
 // });
 
+// JS styling for even numbered table rows that's no longer needed & moved back to CSS (another dot notation mistake when adding a class). Math.floor & bitwise methods work
+// for (let i = 0; i < tableRow.length; i++) {
+//   if (i % 2 !== 0) {
+//     tableRow.style.backgroundColor = 'hsl(0 0% 0% / .1)';
+//   }
+// }

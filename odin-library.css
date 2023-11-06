@@ -52,15 +52,9 @@ th {
   background: hsl(0 0% 0% / .5);
 }
 
-/* This might have to be styled in bookDisplay function in JS file. None of tr, .book-info, tr.book-info, .book-info:nth-child(2n or even) work */
 tr.book-info:nth-of-type(2n) {
   background: hsl(0 0% 0% / .1);
 }
-
-/* This targets the table header and every DOM generated row under it because there are only 2 children under table to begin with (there is no starting at 4th before DOM) */
-/* table:nth-child(2n+2) {
-  background: hsl(0 0% 0% / .1);
-} */
 
 @media (max-width: 650px) {
   th {
