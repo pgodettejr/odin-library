@@ -110,39 +110,11 @@ function bookDisplay() {
 
     const removeBtn = document.createElement("button");
     const removeText = document.createTextNode("REMOVE");
-    removeBtn.classList.add(".remove");
-
-    removeBtn.style.margin = '0';
-    removeBtn.style.padding = '4px 8px';
-    removeBtn.style.backgroundColor = '#596D48';
-    removeBtn.style.fontSize = '12px';
-    removeBtn.style.fontWeight = '700';
-
-    removeBtn.addEventListener("mouseover", (e) => {
-      e.target.style.backgroundColor = 'hsl(92 20% 56%)';
-    });
-
-    removeBtn.addEventListener("mouseleave", (e) => {
-      e.target.style.backgroundColor = '#596D48';
-    });
+    removeBtn.classList.add("remove");
 
     const readBtn = document.createElement('button');
     const finishText = document.createTextNode("FINISHED?");
     readBtn.classList.add("read-status");
-
-    readBtn.style.margin = '0';
-    readBtn.style.padding = '4px 8px';
-    readBtn.style.backgroundColor = '#596D48';
-    readBtn.style.fontSize = '12px';
-    readBtn.style.fontWeight = '700';
-
-    readBtn.addEventListener("mouseover", (e) => {
-      e.target.style.backgroundColor = 'hsl(92 20% 56%)';
-    });
-
-    readBtn.addEventListener("mouseleave", (e) => {
-      e.target.style.backgroundColor = '#596D48';
-    });
 
     removeBtn.appendChild(removeText);
     readBtn.appendChild(finishText);
@@ -338,3 +310,34 @@ bookDisplay(myLibrary); */
 // Tried to target closest tr with a class of book-info for deletion
     // const row = e.target.closest(".book-info");
     // row.remove();
+
+// Remove & Read button styling I thought I needed to put in the JS because the CSS attempts weren't working but it was because of a stupid dot that they weren't
+
+// removeBtn.style.margin = '0';
+// removeBtn.style.padding = '4px 8px';
+// removeBtn.style.backgroundColor = '#596D48';
+// removeBtn.style.fontSize = '12px';
+// removeBtn.style.fontWeight = '700';
+
+// removeBtn.addEventListener("mouseover", (e) => {
+//   e.target.style.backgroundColor = 'hsl(92 20% 56%)';
+// });
+
+// removeBtn.addEventListener("mouseleave", (e) => {
+//   e.target.style.backgroundColor = '#596D48';
+// });
+
+// readBtn.style.margin = '0';
+// readBtn.style.padding = '4px 8px';
+// readBtn.style.backgroundColor = '#596D48';
+// readBtn.style.fontSize = '12px';
+// readBtn.style.fontWeight = '700';
+
+// readBtn.addEventListener("mouseover", (e) => {
+//   e.target.style.backgroundColor = 'hsl(92 20% 56%)';
+// });
+
+// readBtn.addEventListener("mouseleave", (e) => {
+//   e.target.style.backgroundColor = '#596D48';
+// });
+

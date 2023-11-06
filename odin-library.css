@@ -159,3 +159,28 @@ button {
 .new-book:hover {
   background: hsl(92 20% 56%);
 }
+
+/* The only reason these or the other 47805732108 attempts didn't work before was because I put dot notation when adding a class to the button in the JS that I didn't need xD */
+td[data-cell="Delete"] > .remove {
+  margin: 0;
+  padding: 4px 8px;
+  background-color: #596D48;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+td[data-cell="Delete"] > .remove:hover {
+  background-color: hsl(92 20% 56%);
+}
+
+td[data-cell="Toggle"] > .read-status {
+  margin: 0;
+  padding: 4px 8px;
+  background-color: #596D48;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+td[data-cell="Toggle"] > .read-status:hover {
+  background-color: hsl(92 20% 56%);
+}
