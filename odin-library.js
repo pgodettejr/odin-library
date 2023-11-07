@@ -134,32 +134,74 @@ function bookDisplay() {
       myLibrary.splice(-1, 1);
     });
 
+    // Read status button functionality attempts
+
+    // readBtn.addEventListener('click', () => {
+    //   if (bookFinishInfo.textContent === 'Yes') {
+    //     return bookFinishInfo.textContent === 'No';
+    //   } else if (bookFinishInfo.textContent === 'No') {
+    //     return bookFinishInfo.textContent === 'Yes';
+    //   }
+    // });
+
+    // bookToggle.addEventListener('click', (e) => {
+    //   if (e.target.tagName === 'BUTTON') {
+    //     toggleSwitch();
+    //   }
+    // });
+
+    // function toggleSwitch (e) {
+    //   let bookStatus = e.target.closest("td[data-cell=Finished]");
+    //   if (bookStatus === 'Yes') {
+    //     bookStatus === 'No';
+    //   } else if (bookStatus === 'No') {
+    //     bookStatus === 'Yes';
+    //   }
+    // }
+
+    // This works ONCE. It doesn't work if the user wants to switch back to the old "read" status
+    const readButtons = document.querySelectorAll('.read-status');
+
+    readButtons.forEach(readBtn => {
+      readBtn.addEventListener('click', (e) => {
+        if (bookFinishInfo.textContent === 'Yes') {
+          let toggleSwitch = document.createTextNode('No');
+          bookFinish.replaceChildren();
+          bookFinish.appendChild(toggleSwitch);
+        } else if (bookFinishInfo.textContent === 'No') {
+          let toggleSwitch = document.createTextNode('Yes');
+          bookFinish.replaceChildren();
+          bookFinish.appendChild(toggleSwitch);
+        }
+      });
+    });
+
     // JayBee's approach to "Read" status toggle button on table rows (my linkedArray is undefined but his is defined. How?)
     
     // Link the data attribute of the toggle read button to the array and table row
-    readBtn.dataset.linkedArray = index;
-    console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readBtn.dataset.linkedArray);
+    // readBtn.dataset.linkedArray = index;
+    // console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readBtn.dataset.linkedArray);
 
-    // Create event listener/toggle logic for array object prototype for read status change. Try to make this an anonymous arrow function instead of delcared toggleFinish (see removeBtn above as an example). Might not work based on invocation of "this" in the prototype of Book
-    readBtn.addEventListener("click", toggleFinish);
+    // Create event listener/toggle logic for array object prototype for read status change. Making this an arrow function changes nothing.
+    // readBtn.addEventListener("click", toggleFinish);
 
-    function toggleFinish() {
-      let getBook = readBtn.dataset.linkedArray;
-      Book.prototype = Object.create(Book.prototype); // He said this might not be necessary due to JS automatically giving Book constructor a prototype
-      const toggleBook = new Book(); // this gives toggleBook access to all the book info in the constructor above
-      console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read); // Uncaught TypeError: Cannot read properties of undefined (reading 'read')
+    // function toggleFinish() {
+    //   let getBook = readBtn.dataset.linkedArray;
+    //   Book.prototype = Object.create(Book.prototype); // He said this might not be necessary due to JS automatically giving Book constructor a prototype
+    //   const toggleBook = new Book(); // this gives toggleBook access to all the book info in the constructor above
+    //   console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read); // Uncaught TypeError: Cannot read properties of undefined (reading 'read')
 
-      // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
-      if ((myLibrary[parseInt(getBook)].read) == "Yes") {
-        toggleBook.read = "No";
-        myLibrary[parseInt(getBook)].read = toggleBook.read;
-      } else if ((myLibrary[parseInt(getBook)].read) == "No") {
-        toggleBook.read = "Yes";
-        myLibrary[parseInt(getBook)].read = toggleBook.read;
-      }
+    //   // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
+    //   if ((myLibrary[parseInt(getBook)].read) == "Yes") {
+    //     toggleBook.read = "No";
+    //     myLibrary[parseInt(getBook)].read = toggleBook.read;
+    //   } else if ((myLibrary[parseInt(getBook)].read) == "No") {
+    //     toggleBook.read = "Yes";
+    //     myLibrary[parseInt(getBook)].read = toggleBook.read;
+    //   }
 
-      bookDisplay();
-    }
+    //   bookDisplay();
+    // }
   }
 
   myLibrary.splice(-1, 1);
