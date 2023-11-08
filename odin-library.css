@@ -122,12 +122,6 @@ tr.book-info:nth-of-type(2n) {
   }
 }
 
-/* Attempt to create a backdrop when the dialog form is brought up to further highlight the inert status of the rest of the webpage */
-/* #book-form::backdrop {
-  background: #f6f9ff;
-  opacity: 0.75;
-} */
-
 label, input {
   display: block;
   padding: 0;
@@ -154,7 +148,6 @@ button {
   background: hsl(92 20% 56%);
 }
 
-/* The only reason these or the other 47805732108 attempts didn't work before was because I put dot notation when adding a class to the button in the JS that I didn't need xD */
 td[data-cell="Delete"] > .remove {
   margin: 0;
   padding: 4px 8px;

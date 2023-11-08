@@ -19,7 +19,6 @@ function Book(title, author, pages, read) {
 
 // Stores new Book objects into myLibrary array via user input
 function addBookToLibrary() {
-  // Making these global doesn't work. User input never posts to table.
   let title = document.querySelector("#book-title").value;
   let author = document.querySelector("#book-author").value;
   let pages = document.querySelector("#total-pages").value;
@@ -32,7 +31,7 @@ function addBookToLibrary() {
   }
 }
 
-// Adds accessibility to all table elements for the disabled via ARIA. This existing is possibly throwing off row positioning (separate tbody with all elements created as 1st child)
+// Adds accessibility to all table elements for the disabled via ARIA
 function AddTableARIA() {
   try {
     let allTables = document.querySelectorAll('table');
@@ -71,16 +70,14 @@ function AddTableARIA() {
 
 AddTableARIA();
 
-// Loops through myLibrary array & displays each Book as a table row in the table
+// Loops through myLibrary array & displays each Book as a table row in the table via DOM manipulation
 function bookDisplay() {
-  let index = 0;
-
   for (const book in myLibrary) {
+    // Generates the table row itself
     const tableRow = document.createElement("tr");
     tableRow.classList.add("book-info");
 
-    // const tableRows = document.querySelectorAll(".book-info"); <-- use this on a possible forEach method
-
+    // Generates table data & sets appropriate data-attributes
     const bookTitle = document.createElement("td");
     const bookAuthor = document.createElement("td");
     const bookPages = document.createElement("td");
@@ -88,7 +85,6 @@ function bookDisplay() {
     const bookDelete = document.createElement("td");
     const bookToggle = document.createElement("td");
 
-    // Should I set another "contenteditable", "true" attribute on bookFinish to allow users to change from Yes to No? (all bookToggle code could be deleted if we do this)
     bookTitle.setAttribute("data-cell", "Title");
     bookAuthor.setAttribute("data-cell", "Author");
     bookPages.setAttribute("data-cell", "Pages");
@@ -96,11 +92,13 @@ function bookDisplay() {
     bookDelete.setAttribute("data-cell", "Delete");
     bookToggle.setAttribute("data-cell", "Toggle");
 
+    // Creates Text Nodes inside the table data cells that show corresponding user input from the dialog form
     const bookTitleInfo = document.createTextNode(`${myLibrary[book].title}`);
     const bookAuthorInfo = document.createTextNode(`${myLibrary[book].author}`);
     const bookPagesInfo = document.createTextNode(`${myLibrary[book].pages}`);
     const bookFinishInfo = document.createTextNode(`${myLibrary[book].read}`);
 
+    // Generates "Remove" & "Finished?"(read status) buttons on the table row
     const removeBtn = document.createElement("button");
     const removeText = document.createTextNode("REMOVE");
     removeBtn.classList.add("remove");
@@ -109,6 +107,7 @@ function bookDisplay() {
     const finishText = document.createTextNode("FINISHED?");
     readBtn.classList.add("read-status");
 
+    // Propagate all the elements that are children to appropriate parents
     removeBtn.appendChild(removeText);
     readBtn.appendChild(finishText);
 
@@ -134,32 +133,7 @@ function bookDisplay() {
       myLibrary.splice(-1, 1);
     });
 
-    // Read status button functionality attempts
-
-    // readBtn.addEventListener('click', () => {
-    //   if (bookFinishInfo.textContent === 'Yes') {
-    //     return bookFinishInfo.textContent === 'No';
-    //   } else if (bookFinishInfo.textContent === 'No') {
-    //     return bookFinishInfo.textContent === 'Yes';
-    //   }
-    // });
-
-    // bookToggle.addEventListener('click', (e) => {
-    //   if (e.target.tagName === 'BUTTON') {
-    //     toggleSwitch();
-    //   }
-    // });
-
-    // function toggleSwitch (e) {
-    //   let bookStatus = e.target.closest("td[data-cell=Finished]");
-    //   if (bookStatus === 'Yes') {
-    //     bookStatus === 'No';
-    //   } else if (bookStatus === 'No') {
-    //     bookStatus === 'Yes';
-    //   }
-    // }
-
-    // This works ONCE. It doesn't work if the user wants to switch back to the old "read" status
+    // Read status (Finished?) button functionality. Only works ONCE (doesn't work if the user wants to switch back to the previous "read" status)
     const readButtons = document.querySelectorAll('.read-status');
 
     readButtons.forEach(readBtn => {
@@ -175,33 +149,6 @@ function bookDisplay() {
         }
       });
     });
-
-    // JayBee's approach to "Read" status toggle button on table rows (my linkedArray is undefined but his is defined. How?)
-    
-    // Link the data attribute of the toggle read button to the array and table row
-    // readBtn.dataset.linkedArray = index;
-    // console.log("show me the dataset link back to the array FOR READ STATUS BUTTON...", readBtn.dataset.linkedArray);
-
-    // Create event listener/toggle logic for array object prototype for read status change. Making this an arrow function changes nothing.
-    // readBtn.addEventListener("click", toggleFinish);
-
-    // function toggleFinish() {
-    //   let getBook = readBtn.dataset.linkedArray;
-    //   Book.prototype = Object.create(Book.prototype); // He said this might not be necessary due to JS automatically giving Book constructor a prototype
-    //   const toggleBook = new Book(); // this gives toggleBook access to all the book info in the constructor above
-    //   console.log("What is the toggle initial value?...", myLibrary[parseInt(getBook)].read); // Uncaught TypeError: Cannot read properties of undefined (reading 'read')
-
-    //   // Run check to see what read value is present to toggle from. parseInt allows the value of the current array index (0, 1, etc) to be seen as well as the read status via .read
-    //   if ((myLibrary[parseInt(getBook)].read) == "Yes") {
-    //     toggleBook.read = "No";
-    //     myLibrary[parseInt(getBook)].read = toggleBook.read;
-    //   } else if ((myLibrary[parseInt(getBook)].read) == "No") {
-    //     toggleBook.read = "Yes";
-    //     myLibrary[parseInt(getBook)].read = toggleBook.read;
-    //   }
-
-    //   bookDisplay();
-    // }
   }
 
   myLibrary.splice(-1, 1);
@@ -212,173 +159,24 @@ bookBtn.addEventListener('click', () => {
   dialog.showModal();
 });
 
-// "Confirm" button functionality that checks that all book table was completed by user, then submits it to the table
+// "Confirm" button functionality that checks that all book table sections were completed by the user, then submits it to the table
 confirmBtn.addEventListener('click', (e) => {
   let complete = document.getElementById("book-form").checkValidity();
   if(complete) {
     e.preventDefault();
     addBookToLibrary();
-    // e.target.dataset.cell += innerText; - This may need to be under addBookToLibrary()
     document.getElementById("book-form").reset();
     dialog.close();
   }
 });
 
-// "Cancel" button functionality that deletes all book table that was entered and closes the form
+// "Cancel" button functionality that deletes all info in the book table that was entered, then closes the form
 cancelBtn.addEventListener('click', () => {
   document.getElementById("book-form").reset();
   dialog.close();
 });
 
-// Do I actually need this or is the "Confirm" button functionality above good enough?
+// This is probably not needed as the "Confirm" button functionality above might be good enough. Leaving it in just in case.
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('confirmBtn').addEventListener('click', addBookToLibrary());
 });
-
-// Old & incorrect code
-
-// const book = new Book('Wild at Heart', 'John Eldredge', '234', 'yes')
-// book.table();
-
-// const data = document.querySelector(".card");
-
-// const newTitle = prompt("Please enter the book title:");
-// const newAuthor = prompt("Please enter the author:");
-// const newPages = parseInt(prompt("How many pages is the book?:"));
-// const newStatus = prompt("Have you read the book? (yes/no)").toLowerCase();
-
-// data.textContent += myLibrary[i].title; // Tried this code and innerText, neither seem to work? Or the issue is addBookToLibrary()
-// data.textContent += myLibrary[i].author;
-// data.textContent += myLibrary[i].pages;
-// data.textContent += myLibrary[i].read;
-
-// tr.appendChild(td);
-
-// May need this under addBookToLibrary() instead
-/* while(true) {
-  let enterBook = prompt("Please add a book title").toLowerCase();
-  if(enterBook === Number || enterBook === null) {
-    break;
-  }
-} */
-
-// Old bookDisplay functions
-
-/* function bookDisplay(datarow) {
-  const firstEmptyRow = document.querySelector('#book-table tr td[data-cell=true]');
-  if (firstEmptyRow === null) {
-    console.log('No more available empty rows');
-    return;
-  }
-
-  let i = 0;
-  for (cellvalue of datarow) {
-    firstEmptyRow.children[i].textContent = cellvalue;
-    i++;
-  }
-
-  firstEmptyRow.setAttribute('data-cell', 'false');
-  dialog.reset();
-} */
-
-/* ChatGPT function that loops through myLibrary array & displays each book on the webpage via "card"
-
-function bookDisplay(library) {
-  td[data-cell=true].textContent = '';
-  for (let i = 0; i < library.length; i++) {
-    const book = library[i];
-
-    // Everything below this line would have to change to accommodate table elements
-
-    const bookInfo = `${book.title} by ${book.author}, ${book.pages} pages, ${book.read()}`;
-    const card = document.createElement('div');
-
-    card.classList.add('card');
-    card.textContent = bookInfo;
-    main.appendChild(card);
-  }
-} */
-
-  // Incorrect ways to delete the first item in the array when the next item is reached
-  // if (myLibrary === myLibrary[1]){
-  //   myLibrary.shift();
-  // }
-
-  // This one might work with the plural parameter in JayBee's solution above
-  // const tableRows = document.querySelectorAll(".book-info");
-  // for (let i = 0; i < tableRow(s); i++) {
-  //   tableRow(s)[i].remove();
-  // }
-
-/* for (let i = 0; i < table.length; i++) {
-    const bookTitle = document.querySelector("td[data-cell=Title]");
-    const bookAuthor = document.querySelector("td[data-cell=Author]");
-    const bookPages = document.querySelector("td[data-cell=Pages]");
-    const bookFinish = document.querySelector("td[data-cell=Finished]");
-    
-    if (tableRow === "") {
-      
-      // Tried putting all this under an "if" statement with an empty row condition
-
-      bookTitle.innerText += table[i].title;
-      bookAuthor.innerText += table[i].author;
-      bookPages.innerText += table[i].pages;
-      bookFinish.innerText += table[i].read;
-    }
-    
-    // Might not even need these. Tried changing appendChild to textContent
-
-    tr.textContent(bookTitle);
-    tr.textContent(bookAuthor);
-    tr.textContent(bookPages);
-    tr.textContent(bookFinish);
-  }
-
-bookDisplay(myLibrary); */
-
-// A possible way to brighten the colors of all buttons on hover in JS
-    // buttons.addEventListener("mouseover", () => {
-    //   buttons.classList.add("hover");
-    //   buttons.style.backgroundColor = "";
-    // });
-
-// Tried to target closest tr with a class of book-info for deletion
-    // const row = e.target.closest(".book-info");
-    // row.remove();
-
-// Remove & Read button styling I thought I needed to put in the JS because the CSS attempts weren't working but it was because of a stupid dot that they weren't
-
-// removeBtn.style.margin = '0';
-// removeBtn.style.padding = '4px 8px';
-// removeBtn.style.backgroundColor = '#596D48';
-// removeBtn.style.fontSize = '12px';
-// removeBtn.style.fontWeight = '700';
-
-// removeBtn.addEventListener("mouseover", (e) => {
-//   e.target.style.backgroundColor = 'hsl(92 20% 56%)';
-// });
-
-// removeBtn.addEventListener("mouseleave", (e) => {
-//   e.target.style.backgroundColor = '#596D48';
-// });
-
-// readBtn.style.margin = '0';
-// readBtn.style.padding = '4px 8px';
-// readBtn.style.backgroundColor = '#596D48';
-// readBtn.style.fontSize = '12px';
-// readBtn.style.fontWeight = '700';
-
-// readBtn.addEventListener("mouseover", (e) => {
-//   e.target.style.backgroundColor = 'hsl(92 20% 56%)';
-// });
-
-// readBtn.addEventListener("mouseleave", (e) => {
-//   e.target.style.backgroundColor = '#596D48';
-// });
-
-// JS styling for even numbered table rows that's no longer needed & moved back to CSS (another dot notation mistake when adding a class). Math.floor & bitwise methods work
-// for (let i = 0; i < tableRow.length; i++) {
-//   if (i % 2 !== 0) {
-//     tableRow.style.backgroundColor = 'hsl(0 0% 0% / .1)';
-//   }
-// }
