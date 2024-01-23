@@ -9,12 +9,14 @@ const cancelBtn = document.querySelector("#cancelBtn");
 // List of books in the library
 const myLibrary = [];
 
-// Constructor for making "Book" objects & reporting "Book" table
-function Book(title, author, pages, read) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+// Class for making "Book" objects & reporting "Book" table
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 // Stores new Book objects into myLibrary array via user input
