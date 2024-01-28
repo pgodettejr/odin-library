@@ -135,7 +135,7 @@ function bookDisplay() {
       myLibrary.splice(-1, 1);
     });
 
-    // Read status (Finished?) button functionality. Only works ONCE (doesn't work if the user wants to switch back to the previous "read" status)
+    // Read status (Finished?) button functionality
     const readButtons = document.querySelectorAll('.read-status');
 
     readButtons.forEach(readBtn => {
@@ -176,9 +176,4 @@ confirmBtn.addEventListener('click', (e) => {
 cancelBtn.addEventListener('click', () => {
   document.getElementById("book-form").reset();
   dialog.close();
-});
-
-// This is probably not needed as the "Confirm" button functionality above might be good enough. Leaving it in just in case.
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('confirmBtn').addEventListener('click', addBookToLibrary());
 });
