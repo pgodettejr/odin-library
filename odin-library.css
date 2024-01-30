@@ -151,13 +151,13 @@ button {
 td[data-cell="Delete"] > .remove {
   margin: 0;
   padding: 4px 8px;
-  background-color: #596D48;
+  background-color: red;
   font-size: 12px;
   font-weight: 700;
 }
 
 td[data-cell="Delete"] > .remove:hover {
-  background-color: hsl(92 20% 56%);
+  background: hsl(0, 100%, 75%);
 }
 
 td[data-cell="Toggle"] > .read-status {
